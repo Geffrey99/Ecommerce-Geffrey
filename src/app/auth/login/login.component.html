@@ -1,0 +1,69 @@
+<nav class="navbar bg-body-tertiary">
+	<div class="container-fluid d-flex justify-content-center">
+	  <a class="navbar-brand mx-auto" href="#">
+		<img src="assets/img/logoO.png" alt="" width="150" class="d-inline-block align-text-top">
+	  </a>
+	</div>
+  </nav>
+ <!--------INCIAR SESION O REGISTRARTE --> 
+ <div class="container" id="container" [ngClass]="{'right-panel-active': isRightPanelActive}">
+	<div class="form-container sign-up-container">
+		<form [formGroup]="registerForm">
+			<h1>Crear cuenta</h1>
+			<div class="social-container">
+				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+			</div>
+			<span>or use your email for registration</span>
+			<input formControlName="nombre" class="form-control" type="text" placeholder="Name" />
+			<input formControlName="apellido" class="form-control" type="text" placeholder="LastName" />
+			<input formControlName="email" class="form-control" type="email" placeholder="Email" />
+			<input formControlName="password" class="form-control" type="password" placeholder="Password" />
+			<button type="submit" (click)="register()">Crear cuenta</button>
+		</form>
+	</div>
+	<div class="form-container sign-in-container">
+		<form [formGroup]="loginForm">
+			
+			<h1>Iniciar sesión</h1>
+			<div class="social-container">
+				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+			</div>
+			<span>or use your account</span>
+			<input formControlName="email" class="form-control" type="email" placeholder="Email" />
+			<div *ngIf="this.email.invalid && (email.dirty || email.touched)" class="text-danger" >
+ 			 <div *ngIf="email.errors?.['required']">El email es requerido .</div>
+ 			 <div *ngIf="email.errors?.['email']">El email no es válido.</div>
+			</div>
+			
+			<input formControlName="password" class="form-control" type="password" placeholder="Password" />
+			<div *ngIf="this.password.invalid && (email.dirty || email.touched)" class="text-danger" >
+				<div *ngIf="password.errors?.['required']">La contraseña es requerida.</div>
+				<div *ngIf="password.errors?.['minlength']">Contraseña no valida.</div>
+			  </div>
+			 
+			<a href="#">¿Has olvidado tu contraseña?</a>
+			<button type="submit" (click)="login()">Iniciar sesión</button>
+			<p class="text-danger"> {{loginError}}</p>
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1>Bienvenido de nuevo!</h1>
+				<p>Para mantenerte conectado con nosotros, por favor inicia sesión con tu información personal</p>
+				<button class="ghost" id="signIn" (click)="togglePanel(false)">Iniciar sesión</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h1>Hola, Amig:!</h1>
+				<p>Introduce tus datos personales y comienza tu viaje con nosotros.</p>
+				<button class="ghost" id="signUp" (click)="togglePanel(true)">Registrate</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
