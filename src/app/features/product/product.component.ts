@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../services/features/product.service';
-import { Product } from '../../services/features/Product';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { Product } from '../../services/producto';
 @Component({
   selector: 'app-product',
   standalone: true,
@@ -12,22 +12,24 @@ import { RouterModule } from '@angular/router';
   styleUrl: './product.component.css'
 })
 export class ProductComponent implements OnInit {
-
-  products?: Product[];
+  products: Product[] = [];
+  private imageBaseUrl = 'http://localhost:8081/api/product-images/';
 
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.getAllProducts();
+    this.productService.getAllProducts().subscribe(data => {
+      this.products = data.map(product => {
+        product.photoUrl = product.photoUrl;  // Este campo ya debería contener el nombre de archivo
+        return product;
+      });
+    });
   }
 
-  getAllProducts(): void {
-    this.productService.getAllProducts()
-      .subscribe(products => this.products = products);
-      console.log(this.products);
+  getFullImageUrl(photoUrl: string): string {
+    return `${this.imageBaseUrl}${photoUrl}`;
   }
 }
-
 
 
 // import { Product } from './product.model';
