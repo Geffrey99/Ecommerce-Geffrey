@@ -29,56 +29,7 @@ export class ProductService {
     const url = `${this.apiUrl}/${id}`; 
     return this.http.get<Product>(url);
   }
-
-
-  // createProduct(product: any, file: File): Observable<Product> {
-  //   const formData = new FormData();
-    
-  //   // Agregar los datos del producto al FormData
-  //   Object.keys(product).forEach(key => {
-  //     formData.append(key, product[key]);
-  //   });
   
-  //   // Agregar el archivo al FormData
-  //   formData.append('photo', file);
-  
-  //   const createUrl = `${this.apiUrl}/create`;
-  //   return this.http.post<Product>(createUrl, formData);
-  // }
-  // createProduct(product: Product): Observable<Product> {
-  //   const createUrl = `${this.apiUrl}/create`;
-  //   return this.http.post<Product>(createUrl, product);
-
-
-  // createProduct(product: Product, photo: File): Observable<Product> {
-  //   const formData = new FormData();
-  
-  //   if (product.description !== undefined) {
-  //     formData.append('description', product.description);
-  //   }
-    
-  //   if (product.name !== undefined) {
-  //     formData.append('name', product.name);
-  //   }
-    
-  //   if (product.price !== undefined) {
-  //     formData.append('price', String(product.price));
-  //   }
-    
-  //   if (product.stock !== undefined) {
-  //     formData.append('stock', String(product.stock));
-  //   }
-    
-  //   if (product.category?.id) {
-  //     formData.append('category_id', String(product.category.id));
-  //   }
-  //   formData.append('photo', photo);
-  //   const createUrl = `${this.apiUrl}/create`;
-  //   return this.http.post<Product>(createUrl, formData);
-  // }
-
-
-
   createProduct(product: Product): Observable<Product> {
     const createUrl = `${this.apiUrl}/create`;
     return this.http.post<Product>(createUrl, product);

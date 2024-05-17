@@ -1,0 +1,29 @@
+/* Estilos para el contenedor del carrusel */
+.product-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+}
+
+/* Estilos para cada producto individual */
+.product-item {
+     flex: 0 0 auto;
+    width: 250px; 
+    scroll-snap-align: start;
+    margin-right: 16px; /* Espacio entre productos*/
+}
+
+.product-carousel::-webkit-scrollbar {
+    display: none; /*Oculta la barra de desplazamiento en navegadores basados en Webkit*/
+}
+
+.card-img-top {
+    max-height: 200px;
+    object-fit: cover;
+}
+.card-body {
+    padding: 1rem;
+}
+.card-footer {
+    padding: 1rem;
+} 

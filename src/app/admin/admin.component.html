@@ -1,66 +1,6 @@
 <p>admin works!</p>
 
 <P> Prueba de añadir producto </P>
-<!-- <form #productForm="ngForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-        <label for="name">Nombre:</label>
-        <input type="text" class="form-control" id="name" name="name" [(ngModel)]="product.name" required>
-    </div>
-    <div class="form-group">
-        <label for="price">Precio:</label>
-        <input type="number" class="form-control" id="price" name="price" [(ngModel)]="product.price" required>
-    </div>
-    <div class="form-group">
-        <label for="description">Descripción:</label>
-        <textarea class="form-control" id="description" name="description" [(ngModel)]="product.description" required></textarea>
-    </div>
-    <div class="form-group">
-        <label for="stock">Stock:</label>
-        <input type="number" class="form-control" id="stock" name="stock" [(ngModel)]="product.stock" required>
-    </div>
-    <div class="form-group">
-        <label for="category">Categoría:</label>
-        <input type="text" class="form-control" id="category" name="category" [(ngModel)]="product.category" required>
-    </div>
-    <div class="form-group">
-        <label for="photo">Foto:</label>
-       <input type="file" class="form-control-file" id="photo" name="photo" accept="image/*" required>
-    </div>
-    <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">Guardar</button>
-</form> -->
-
-<!-- <form (ngSubmit)="onSubmit()">
-    <input type="text" [(ngModel)]="product.name" name="name" placeholder="Name" required>
-    <input type="number" [(ngModel)]="product.price" name="price" placeholder="Price" required>
-    <textarea [(ngModel)]="product.description" name="description" placeholder="Description" required></textarea>
-    <input type="number" [(ngModel)]="product.stock" name="stock" placeholder="Stock" required>
-    <input type="file" (change)="onPhotoChange($event)" accept="image/*" required>
-    <button type="submit">Save</button>
-  </form> -->
-
-  <!-- <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
-    <div>
-      <label for="name">Nombre:</label>
-      <input type="text" id="name" formControlName="name" required>
-    </div>
-    <div>
-      <label for="price">Precio:</label>
-      <input type="number" id="price" formControlName="price" required>
-    </div>
-    <div>
-      <label for="description">Descripción:</label>
-      <textarea id="description" formControlName="description" required></textarea>
-    </div>
-    <div>
-      <label for="stock">Stock:</label>
-      <input type="number" id="stock" formControlName="stock" required>
-    </div>
-    <div>
-      <label for="photo">Foto:</label>
-      <input type="file" id="photo" formControlName="photo">
-    </div>
-    <button type="submit">Guardar Producto</button>
-  </form> -->
 
   <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
     <div>
@@ -89,3 +29,10 @@
     </div>
     <button type="submit">Guardar Producto</button>
   </form>
+
+
+  <!------SUBIR IMAGENES DE ESE PRODUCTO -->
+<form (submit)="onSubmit()">
+  <input type="file" (change)="onFileSelected($event)" accept="image/*">
+  <button type="submit">Subir Imagen</button>
+</form>
