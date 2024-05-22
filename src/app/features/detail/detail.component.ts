@@ -7,10 +7,12 @@ import { Product } from '../../services/features/Product';
 import { PhotoProductService } from '../../services/PhotoProduct.service';
 import { catchError, of, switchMap, throwError } from 'rxjs';
 import { HeaderComponent } from "../../shared/header/header.component";
+import { CartService } from '../../services/features/cart.service';
+
 @Component({
     selector: 'app-detail',
     standalone: true,
-    providers: [ProductService, PhotoProductService],
+    providers: [ProductService, PhotoProductService, CommonModule],
     templateUrl: './detail.component.html',
     styleUrl: './detail.component.css',
     imports: [HttpClientModule, CommonModule, HeaderComponent]
@@ -27,7 +29,8 @@ export class DetailComponent implements OnInit {
     private route: ActivatedRoute,
     private productService: ProductService,
     private PhotoProductService: PhotoProductService,
-    private viewportScroller: ViewportScroller
+    private viewportScroller: ViewportScroller,
+    private cartService:CartService
   ) { }
 
   ngOnInit(): void {
@@ -48,6 +51,21 @@ export class DetailComponent implements OnInit {
         return product;
       });
     });
+
+    const routeParams = this.route.snapshot.paramMap;
+    const productIdFromRoute = Number(routeParams.get('productId'));
+  
+  // Encuentra el producto que corresponde con el id proporcionado en ruta.
+    this.product = this.products.find(product => product.id === productIdFromRoute);
+  }
+  
+  addToCart(product?: Product): void {
+    if (product) {
+      this.cartService.addToCart(product);
+      window.alert('Ok, producto añadido al carrito');
+    } else {
+      window.alert('Error: Producto no disponible');
+    }
   }
 
   loadProduct(): void {
@@ -61,6 +79,11 @@ export class DetailComponent implements OnInit {
   getFullImageUrl(photoUrl: string): string {
     return `${this.imageBaseUrl}${photoUrl}`;
   }
+
+
+
+
+ 
 
 // para cargar imagen de product 
 
