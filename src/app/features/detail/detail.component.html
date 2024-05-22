@@ -1,0 +1,70 @@
+<!----------Cabezera de la pagina------------>
+<app-header></app-header>
+<!----------Cuerpo de la pagina detalles del producto a Comprar------------>
+<section class="py-2">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..." /></div>
+            <div class="col-md-6">
+                <div class="small mb-1">Categoria : {{product?.category?.name ?? 'Categoría no disponible'}}</div>
+                <h1 class="display-5 fw-bolder">{{ product?.name }}</h1>
+                <div class="fs-5 mb-5">
+                    <span class="text-decoration-line-through">10%</span>
+                    <span>€{{product?.price }}</span>
+                </div>
+                <p class="lead">{{product?.description}}</p>
+                <div class="d-flex">
+                    <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+                    <button class="btn btn-outline-dark flex-shrink-0" type="button"   (click)="addToCart(product)">
+                        <i class="bi-cart-fill me-1"></i>
+                     
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-----SECCION DE MAS PRODUCTOS -->
+
+<section class="py-5 bg-light">
+    <div class="container px-4 px-lg-5 mt-5">
+        <h2 class="fw-bolder mb-4">Productos relacionados</h2>
+        <div class="product-carousel">
+            <div class="product-item" *ngFor="let product of products" (click)="loadSelectedProduct(product.id)">
+                <div class="card h-100">
+                    <img class="card-img-top" [src]="getFullImageUrl(product.photoUrl)" [alt]="product.name" />
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <h5 class="fw-bolder">{{ product.name }}</h5>
+                             <span *ngIf="product.price; else regularPrice">
+                                <span class="text-muted text-decoration-line-through">{{ product.price }} €</span>
+                                {{ product.price }} € 
+                            </span>
+                     <ng-template #regularPrice>
+                                {{ product.price }} €
+                            </ng-template>
+                        </div> 
+                    </div>
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center">
+                            <!-- <a class="btn btn-outline-dark mt-auto" [routerLink]="['/product', product.id]">Ver opciones</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 
+
+
+<!-- Footer-->
+<footer class="py-5 bg-dark">
+    <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
+</footer>
+
+<!-- 
+<form (submit)="onSubmit()">
+    <input type="file" (change)="onFileSelected($event)" accept="image/*">
+    <button type="submit">Subir Imagen</button>
+  </form> -->

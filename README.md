@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Ecommerce-Geffrey
 
 Mi proyecto final de grado (TFG) del Ciclo Formativo Superior de Desarrollo de Aplicaciones Web
