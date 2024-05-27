@@ -6,30 +6,28 @@ import { usuario } from './user';
 @Injectable({
   providedIn: 'root'
 })
+
 export class LoginService {
-// inicialmente no va a estar logueado
   currentUserLoginOn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  
-  currentUserData: BehaviorSubject<usuario> = new BehaviorSubject<usuario>({nombre: '', apellido: '', email: '', password: ''});
+  currentUserData: BehaviorSubject<usuario | null> = new BehaviorSubject<usuario | null>(null);
 
-  constructor(private http: HttpClient) { }
-  
-  login(credentials: LoginRequest):Observable<any>{
-    console.log('1 servicio');
-    console.log(credentials);
- 
-    return this.http.post<any>('http://localhost:8081/login', credentials).pipe(
-      tap ((userData) => {
-        console.log('2servicio');
-        console.log(userData);
-        // this.currentUserData.next(n); // Emitir null primero para indicar que se está cargando
-        this.currentUserData.next(userData); // Luego emitir el usuario autenticado
-        this.currentUserLoginOn.next(true);
-  }),
-  catchError(this.handleError)
+  constructor(private http: HttpClient) {}
+
+  login(credentials: LoginRequest): Observable<usuario> {
+    return this.http.post<usuario>('http://localhost:8081/login', credentials).pipe(
+      tap(userData => {
+        console.log('LoginService - Data received:', userData);
+        this.setCurrentUser(userData);
+      }),
+      catchError(this.handleError)
     );
-}
+  }
 
+  setCurrentUser(userData: usuario): void {
+    this.currentUserData.next(userData);
+    console.log('LoginSereeeeeeee:', userData);
+    this.currentUserLoginOn.next(true);
+  }
 private handleError(error:HttpErrorResponse)  {
 if (error.status===0) {
   console.error('Se ha producido un error:', error.error);
@@ -43,7 +41,7 @@ return throwError(() => new Error('Error de conexión'));
 }
 
 
-get userData(): Observable<usuario> {
+get userData(): Observable<usuario | null> {
   return this.currentUserData.asObservable();
 }
 

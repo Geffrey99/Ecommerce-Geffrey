@@ -12,15 +12,14 @@ import { UserComponent } from '../../user/user.component';
   selector: 'app-login',
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, HttpClientModule, UserComponent],
-  providers: [LoginService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit{
 loginError:string="";
 isRightPanelActive: boolean = false; // Variable para controlar el panel activo
-// userLoginOn: boolean = false;
-// userData?: usuario;
+userLoginOn: boolean = false;
+userData?: usuario;
   constructor(private formBuilder: FormBuilder, private loginservice: LoginService, private router: Router ) {}
 
   ngOnInit(): void {
@@ -48,29 +47,28 @@ get password() {
   return this.loginForm.controls.password;
 }
 
-  login(): void{
-    if (this.loginForm.valid) {
-      this.loginservice.login(this.loginForm.value as LoginRequest).subscribe({
-        next: (userData) => {
-          console.log('3 componente ');
-          console.log(userData); 
-         
-        },
-        error: (errorData)  => {
-          console.error(errorData);
-          this.loginError = errorData;
-        },
-        complete: ()  => {
-          console.info('Login Completado con exito');
-          this.router.navigateByUrl('app-user');
-          this.loginForm.reset();
-        }
-      })
-    } else {
-      this.loginForm.markAllAsTouched();
-      alert("Formulario inválido");
-    }
+login(): void {
+  if (this.loginForm.valid) {
+    this.loginservice.login(this.loginForm.value as LoginRequest).subscribe({
+      next: (response) => {
+        const userData = response.usuario;
+        console.log('LoginComponent - Data received:', userData);
+      },
+      error: (errorData) => {
+        console.error(errorData);
+        this.loginError = errorData.message || 'Error al iniciar sesión';
+      },
+      complete: () => {
+        console.info('Login Completado con exito');
+        this.router.navigate(['/app-user']);
+        this.loginForm.reset();
+      }
+    });
+  } else {
+    this.loginForm.markAllAsTouched();
+    alert("Formulario inválido");
   }
+}
 
 
 register(): void {
@@ -80,6 +78,9 @@ register(): void {
       next: (userData) => {
         console.log('3 componente ');
         console.log(userData); 
+        this.userData = userData;
+        this.loginservice.currentUserData.next(userData);
+        this.loginservice.currentUserLoginOn.next(true);
        
       },
       error: (errorData)  => {

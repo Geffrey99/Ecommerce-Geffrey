@@ -77,22 +77,40 @@
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-      <div *ngIf="!userLoginOn">
+      <div>
         <p>Por favor inicia sesión</p>
         <a class="btn btn-primary" href="/iniciar-sesion">Iniciar sesión</a>
-        
-      <div *ngIf="userLoginOn">
+      </div>
+      <!-- <div *ngIf="userLoginOn"> -->
         <!-- <p>Bienvenido {{ userData?.id }}</p>
         <p>Nombre: {{ userData?.nombre }}</p>
         <p>Apellido: {{ userData?.apellido }}</p>
         <p>Email: {{ userData?.email }}</p> -->
         <!-- Agrega más campos según sea necesario -->
-      </div>
+      <!-- </div>
       <div *ngIf="userLoginOn">
         <a class="btn btn-primary" href="/inicio">Cerrar sesión</a>
-      </div>
+      </div> -->
     </div>
   </div>
   
 
+<!---Referencia-->
+<!-- <div class="offcanvas-body"> -->
+  <!-- <div *ngIf="!userLoginOn"> -->
+    <!-- <p>Por favor inicia sesión</p> -->
+    <!-- <a class="btn btn-primary" href="/iniciar-sesion">Iniciar sesión</a> -->
+    
+  <!-- <div *ngIf="userLoginOn"> -->
+    <!-- <p>Bienvenido {{ userData?.id }}</p>
+    <p>Nombre: {{ userData?.nombre }}</p>
+    <p>Apellido: {{ userData?.apellido }}</p>
+    <p>Email: {{ userData?.email }}</p> -->
+    <!-- Agrega más campos según sea necesario -->
+  <!-- </div>
+  <div *ngIf="userLoginOn">
+    <a class="btn btn-primary" href="/inicio">Cerrar sesión</a>
+  </div>
+</div>
+</div> -->
 

@@ -1,4 +1,5 @@
 export interface usuario {
+    usuario: any;
     id?: number;
     nombre?: string;
     apellido?: string;
