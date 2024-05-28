@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router'
-import { LoginService } from '../../services/auth/login.service';
+import { LoginService } from '../../services/auth/auth.service';
 import { LoginRequest } from '../../services/auth/loginRequest';
 import { HttpClientModule } from '@angular/common/http';
 import { usuario } from '../../services/auth/user';
@@ -52,7 +52,17 @@ login(): void {
     this.loginservice.login(this.loginForm.value as LoginRequest).subscribe({
       next: (response) => {
         const userData = response.usuario;
+        const userRole = userData.rol; // Asume que el rol viene dentro del objeto usuario
         console.log('LoginComponent - Data received:', userData);
+
+        // Redirigir basado en el rol del usuario
+        if (userRole === 'Admin') {
+          this.router.navigate(['/admin']);
+        } else {
+          this.router.navigate(['/app-user']);
+        }
+
+        this.loginForm.reset();
       },
       error: (errorData) => {
         console.error(errorData);
@@ -60,8 +70,6 @@ login(): void {
       },
       complete: () => {
         console.info('Login Completado con exito');
-        this.router.navigate(['/app-user']);
-        this.loginForm.reset();
       }
     });
   } else {
@@ -71,36 +79,52 @@ login(): void {
 }
 
 
+// register(): void {
+//   if (this.registerForm.valid) {
+//     this.loginservice.registerContacto(this.registerForm.value as usuario).subscribe({
+
+//       next: (userData) => {
+//         console.log('3 componente ');
+//         console.log(userData); 
+       
+//       },
+//       error: (errorData)  => {
+//         console.error(errorData);
+//         this.loginError = errorData;
+//       },
+//       complete: ()  => {
+//         console.info('Registro completado con exito');
+//         this.router.navigateByUrl('app-user');
+//         this.registerForm.reset();
+//       }
+//     })
+//   } else {
+//     this.registerForm.markAllAsTouched();
+//     alert("Formulario inválido");
+//   }
+
+
+
+// }
 register(): void {
   if (this.registerForm.valid) {
-    this.loginservice.registerContacto(this.registerForm.value as usuario).subscribe({
-
-      next: (userData) => {
-        console.log('3 componente ');
-        console.log(userData); 
-        this.userData = userData;
-        this.loginservice.currentUserData.next(userData);
-        this.loginservice.currentUserLoginOn.next(true);
-       
-      },
-      error: (errorData)  => {
-        console.error(errorData);
-        this.loginError = errorData;
-      },
-      complete: ()  => {
-        console.info('Registro completado con exito');
-        this.router.navigateByUrl('app-user');
-        this.registerForm.reset();
-      }
-    })
+      this.loginservice.registerContacto(this.registerForm.value as usuario).subscribe({
+          next: (userData) => {
+              console.log('Registro exitoso', userData);
+              this.router.navigateByUrl('app-user'); // Mover esta línea aquí
+              this.registerForm.reset();
+          },
+          error: (errorData) => {
+              console.error('Error en el registro', errorData);
+              this.loginError = errorData;
+              // Mostrar mensaje de error al usuario aquí
+          }
+      });
   } else {
-    this.registerForm.markAllAsTouched();
-    alert("Formulario inválido");
+      this.registerForm.markAllAsTouched();
+      alert("Formulario inválido");
   }
-
-
 }
-
 togglePanel(isSignUp: boolean): void {
   this.isRightPanelActive = isSignUp;
 }

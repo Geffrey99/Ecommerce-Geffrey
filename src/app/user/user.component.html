@@ -120,14 +120,19 @@
         <a class="btn btn-primary" href="/iniciar-sesion">Iniciar sesión</a>
       </div>
       <div *ngIf="userLoginOn">
-        <H1>Estas conectado</H1>
-        <p>Bienvenido {{ userData?.usuario.id }}</p>
-        <p>Nombre: {{ userData?.usuario.nombre }}</p>
-        <p>Apellido: {{ userData?.usuario.apellido }}</p>
-        <p>Email: {{ userData?.usuario.email }}</p> 
+        <h3 class="text-success">Estas conectado {{userData?.rol}} - {{userData?.id}} </h3>
+        <p>Nombre: {{ userData?.nombre }}</p>
+        <p>Apellido: {{ userData?.apellido }}</p>
+        <p>Email: {{ userData?.email }}</p> 
       </div>
       <div *ngIf="userLoginOn">
         <a class="btn btn-primary" href=" ">Cerrar sesión</a>
+      </div>
+      <div *ngIf="userLoginOn">
+        <a class="btn btn-primary" href=" ">Ver pedidos</a>
+      </div>
+      <div *ngIf="userLoginOn">
+        <a class="btn btn-primary" href=" ">Eliminar Cuenta</a>
       </div>
     </div>
   </div>

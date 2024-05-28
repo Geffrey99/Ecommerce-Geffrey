@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
-import { LoginService } from '../services/auth/login.service';
+import { LoginService } from '../services/auth/auth.service';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
