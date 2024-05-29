@@ -17,7 +17,7 @@ import { UserComponent } from '../../user/user.component';
 })
 export class LoginComponent implements OnInit{
 loginError:string="";
-isRightPanelActive: boolean = false; // Variable para controlar el panel activo
+isRightPanelActive: boolean = false; 
 userLoginOn: boolean = false;
 userData?: usuario;
   constructor(private formBuilder: FormBuilder, private loginservice: LoginService, private router: Router ) {}

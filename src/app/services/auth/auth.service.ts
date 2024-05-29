@@ -11,16 +11,23 @@ export class LoginService {
   currentUserLoginOn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   currentUserData: BehaviorSubject<usuario | null> = new BehaviorSubject<usuario | null>(null);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    const user = localStorage.getItem('user');
+    const userRole = localStorage.getItem('userRole');
+    const isUserLoggedIn = localStorage.getItem('isUserLoggedIn');
+    if (user && userRole && isUserLoggedIn) {
+      this.setCurrentUser(JSON.parse(user));
+    }
+  }
 
   login(credentials: LoginRequest): Observable<any> { // Cambia el tipo de retorno a 'any' para incluir el rol
     return this.http.post<any>('http://localhost:8081/login', credentials).pipe(
       tap((response) => {
         const userData = response.usuario;
-        const userRole = userData.rol; // Asume que el rol viene dentro del objeto usuario
+        const userRole = userData.rol; 
         this.setCurrentUser(userData);
         localStorage.setItem('user', JSON.stringify(userData));
-        localStorage.setItem('userRole', userRole); // Guardar el rol del usuario
+        localStorage.setItem('userRole', userRole); 
         localStorage.setItem('isUserLoggedIn', 'true');
       }),
       catchError(this.handleError)
@@ -30,7 +37,6 @@ export class LoginService {
   setCurrentUser(userData: usuario): void {
     this.currentUserData.next(userData);
     this.currentUserLoginOn.next(true);
-    // Aquí puedes agregar más lógica si necesitas manejar el rol en el estado
   }
 
   logout(): void {
@@ -72,6 +78,7 @@ registerContacto(usuario: usuario): Observable<any> {
     catchError(this.handleError)
   );
 }
+
 
 
 }
