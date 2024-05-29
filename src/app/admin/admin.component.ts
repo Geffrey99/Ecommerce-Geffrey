@@ -1,78 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../services/features/product.service';
-import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
-// import { Product } from '../services/features/Product';
-import { HttpClient } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+//-admin.component.ts
+import { Component} from '@angular/core';
+import { HeaderAdminComponent } from './header/header.component';
+import { CommonModule } from '@angular/common';
+import { NavigationEnd, RouterModule } from '@angular/router';
+import { ProductComponent } from '../features/product/product.component';
+import { filter } from 'rxjs';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [FormsModule,     ReactiveFormsModule],
+  imports: [HeaderAdminComponent, CommonModule, RouterModule,  ProductComponent],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
 export class AdminComponent {
-  productForm: FormGroup;
+  showProductComponent = true;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) {
-    this.productForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      price: ['', Validators.required],
-      description: ['', Validators.required],
-      stock: ['', Validators.required],
-      category: [], // Agregar el campo de la categoría aquí
-      photo: ['']
+  constructor(private router: Router) {
+    // Escucha los eventos de cambio de ruta
+    this.router.events.pipe(
+      filter((event: any) => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      // Oculta el componente `app-product` si la ruta es diferente de la inicial
+      this.showProductComponent = event.urlAfterRedirects === '/admin';
     });
-  }
-  onFileSelected(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      this.productForm.patchValue({
-        photo: file
-      });
-    }
-  }
-  onSubmit() {
-    if (this.productForm.valid) {
-      const formData = new FormData();
-      const name = this.productForm.get('name')?.value;
-      const price = this.productForm.get('price')?.value;
-      const description = this.productForm.get('description')?.value;
-      const stock = this.productForm.get('stock')?.value;
-      const category = this.productForm.get('category')?.value; // Agregar el campo de la categoría aquí
-      const photo = this.productForm.get('photo')?.value;
-
-      if (name) {
-        formData.append('name', name);
-      }
-      if (price) {
-        formData.append('price', price);
-      }
-      if (description) {
-        formData.append('description', description);
-      }
-      if (stock) {
-        formData.append('stock', stock);
-      }
-      if (category) {
-        formData.append('category', category); // Enviar el nombre de la categoría directamente
-      }
-      if (photo) {
-        formData.append('photo', photo);
-      }
-
-      this.http.post<any>('http://localhost:8081/api/products/create', formData).subscribe(
-        response => {
-          console.log('Producto creado exitosamente:', response);
-          // Aquí puedes manejar la respuesta, por ejemplo, mostrar un mensaje de éxito
-        },
-        error => {
-          console.error('Error al crear el producto:', error);
-          // Aquí puedes manejar el error, por ejemplo, mostrar un mensaje de error al usuario
-        }
-      );
-    } else {
-      // Marcar los campos del formulario como inválidos o mostrar un mensaje al usuario
-    }
   }
 }

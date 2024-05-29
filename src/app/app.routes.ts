@@ -10,6 +10,7 @@ import { AdminComponent } from './admin/admin.component';
 import { CartComponent } from './features/cart/cart.component';
 
 import { AuthGuard } from './services/guards/auth.guard' // Ajusta la ruta según la ubicación de tu guard
+import { adminRoutes } from './admin/admin.routes';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -17,19 +18,6 @@ export const routes: Routes = [
   { path: 'app-user', component: UserComponent, canActivate: [AuthGuard] },
   { path: 'app-products', component: ProductComponent },
   { path: 'product/:id', component: DetailComponent },
-  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard], children: adminRoutes },
   { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
 ];
-
-
-// export const routes: Routes = [
-//     {path: '', component: HomeComponent , pathMatch: 'full'},
-//     // { path: '', redirectTo: '/inicio', pathMatch: 'full' }, // Redirecciona a la página de inicio por defecto
-//      { path: 'iniciar-sesion', component: LoginComponent},
-//      { path: 'app-user', component: UserComponent},
-//      { path: 'app-products', component: ProductComponent},
-//      {path: 'product/:id', component: DetailComponent},
-//      { path: 'admin', component: AdminComponent},
-//      { path: 'cart', component: CartComponent },
-
-// ];

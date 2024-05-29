@@ -1,1 +1,152 @@
-<p>header works!</p>
+<!---headerAdmin.html-->
+<nav class="navbar navbar-expand-md bg-body-tertiary">
+    <div class="container-xl">
+      <a class="navbar-brand" href="#">
+        <img src="assets/img/logoO.png" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" routerLink="/admin/clientes">Clientes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin/pedidos">Pedidos</a>
+          </li>
+          <!-- <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Portátiles
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Smartphones
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin/productos">Crud-Productos</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Productos 
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Moviles</a></li>
+              <li><a class="dropdown-item" href="#">Ordenadores</a></li>
+              <li><a class="dropdown-item" href="#">Accesorios</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Todos</a></li>
+              <li><a class="dropdown-item" href="#">Otros...</a></li>
+            </ul>
+          </li> 
+        </ul>
+        <div class="search-and-icons">
+          <form class="d-flex mb-2 me-2" role="search">
+            <input class="form-control me-2" type="search" aria-label="Search">
+          </form>
+          <div class="user-icons d-flex mb-2">
+            <!-- <div class="profile" routerLink="/iniciar-sesion" ><i class="bi bi-person"></i></div> -->
+            <!-- <div><button class="profile" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Conectado</button> </div> -->
+            <div><button class="profile" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"> <i class="bi bi-person"></i></button> </div>
+            <div class="wishlist"><i class="bi bi-heart"></i></div>
+            <div class="cart"><i class="bi bi-cart3"></i></div>
+          </div>
+        </div>
+        <div class="contact-info d-md-flex">
+          <p>+0987654321 | +1234567890 </p>
+          <p><a href="mailto:">gzcomercioonline.com</a></p>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+  <style>
+    .carousel-item img {
+      height:  250px;
+      object-fit: cover;
+    }
+    </style>
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+       <img src="assets/img/imagen.jpeg" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="assets/img/imga.jpg" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="assets/img/comprasa.jpg" class="d-block w-100" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Siguiente</span>
+    </button>
+  </div>
+    
+<!-- <app-product></app-product> -->
+
+
+
+
+
+
+
+
+
+
+  <div>
+   <!-----DATOS DEL USUARIO--> 
+   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasRightLabel">Mi cuenta</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div *ngIf="!userLoginOn">
+        <p>Por favor inicia sesión</p>
+        <a class="btn btn-primary" href="/iniciar-sesion">Iniciar sesión</a>
+      </div>
+      <div *ngIf="userLoginOn">
+        <h3 class="text-success">Estas conectado {{userData?.rol}} - {{userData?.id}} </h3>
+        <p>Nombre: {{ userData?.nombre }}</p>
+        <p>Apellido: {{ userData?.apellido }}</p>
+        <p>Email: {{ userData?.email }}</p> 
+      </div>
+      <div *ngIf="userLoginOn">
+        <a class="btn btn-primary" href=" ">Cerrar sesión</a>
+      </div>
+      <div *ngIf="userLoginOn">
+        <a class="btn btn-primary" href=" ">Ver pedidos</a>
+      </div>
+      <div *ngIf="userLoginOn">
+        <a class="btn btn-primary" href=" ">Eliminar Cuenta</a>
+      </div>
+    </div>
+  </div>
+  
+

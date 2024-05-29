@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HeaderAdminComponent } from './header.component';
+import { CrudClientesComponent } from './crud-clientes.component';
 
-describe('HeaderComponent', () => {
-  let component: HeaderAdminComponent;
-  let fixture: ComponentFixture<HeaderAdminComponent>;
+describe('CrudClientesComponent', () => {
+  let component: CrudClientesComponent;
+  let fixture: ComponentFixture<CrudClientesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HeaderAdminComponent]
+      imports: [CrudClientesComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(HeaderAdminComponent);
+    fixture = TestBed.createComponent(CrudClientesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

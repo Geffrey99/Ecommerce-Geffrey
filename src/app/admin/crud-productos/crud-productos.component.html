@@ -1,0 +1,36 @@
+<p>crud-productos works!</p>
+
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="name">Nombre:</label>
+      <input type="text" id="name" formControlName="name" required>
+    </div>
+    <div>
+      <label for="price">Precio:</label>
+      <input type="number" id="price" formControlName="price" required>
+    </div>
+    <div>
+      <label for="description">Descripción:</label>
+      <textarea id="description" formControlName="description" required></textarea>
+    </div>
+    <div>
+      <label for="stock">Stock:</label>
+      <input type="number" id="stock" formControlName="stock" required>
+    </div>
+    <div>
+        <label for="category">Categoría:</label>
+  <input type="text" id="category" formControlName="category" required>
+    </div>
+    <div>
+      <label for="photo">Foto:</label>
+      <input type="file" id="photo" formControlName="photo" (change)="onFileSelected($event)">
+    </div>
+    <button type="submit">Guardar Producto</button>
+  </form>
+
+
+  <!------SUBIR IMAGENES DE ESE PRODUCTO -->
+<form (submit)="onSubmit()">
+  <input type="file" (change)="onFileSelected($event)" accept="image/*">
+  <button type="submit">Subir Imagen</button>
+</form>
