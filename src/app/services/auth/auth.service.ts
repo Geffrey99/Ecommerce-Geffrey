@@ -1,8 +1,8 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoginRequest } from './loginRequest';
+import { LoginRequest } from '../../interface/loginRequest';
 import { Observable, throwError, catchError, BehaviorSubject, tap } from 'rxjs';
-import { usuario } from './user';
+import { usuario } from '../../interface/user';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +12,14 @@ export class LoginService {
   currentUserData: BehaviorSubject<usuario | null> = new BehaviorSubject<usuario | null>(null);
 
   constructor(private http: HttpClient) {
+    if (typeof window !== 'undefined') {
     const user = localStorage.getItem('user');
     const userRole = localStorage.getItem('userRole');
     const isUserLoggedIn = localStorage.getItem('isUserLoggedIn');
     if (user && userRole && isUserLoggedIn) {
       this.setCurrentUser(JSON.parse(user));
     }
+  }
   }
 
   login(credentials: LoginRequest): Observable<any> { // Cambia el tipo de retorno a 'any' para incluir el rol

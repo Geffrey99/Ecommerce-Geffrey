@@ -1,8 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { usuario } from '../../services/auth/user';
+import { usuario } from '../../interface/user';
 import { LoginService } from '../../services/auth/auth.service';
 import { CommonModule } from '@angular/common';
-import { ProductComponent } from '../../features/product/product.component';
+import { ProductComponent } from '../../client/product/product.component';
 import { RouterModule } from '@angular/router';
 
 @Component({

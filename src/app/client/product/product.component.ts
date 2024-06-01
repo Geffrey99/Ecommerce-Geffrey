@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../services/features/product.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { Product } from '../../services/producto';
+import { Product } from '../../interface/producto';
 @Component({
   selector: 'app-product',
   standalone: true,
@@ -13,6 +13,11 @@ import { Product } from '../../services/producto';
 })
 export class ProductComponent implements OnInit {
   products: Product[] = [];
+
+  // cargando: boolean = true;
+  // // Referencia al ng-template del modal de espera
+  // @ViewChild('modalEspera') modalEsperaRef: TemplateRef<any> | undefined;
+
   private imageBaseUrl = 'http://localhost:8081/api/product-images/';
 
   constructor(private productService: ProductService) { }
@@ -20,7 +25,8 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {
     this.productService.getAllProducts().subscribe(data => {
       this.products = data.map(product => {
-        product.photoUrl = product.photoUrl;  // Este campo ya debería contener el nombre de archivo
+        product.photoUrl = product.photoUrl; 
+        // this.cargando = false; 
         return product;
       });
     });

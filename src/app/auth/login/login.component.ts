@@ -4,14 +4,14 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router'
 import { LoginService } from '../../services/auth/auth.service';
-import { LoginRequest } from '../../services/auth/loginRequest';
+import { LoginRequest } from '../../interface/loginRequest';
 import { HttpClientModule } from '@angular/common/http';
-import { usuario } from '../../services/auth/user';
-import { UserComponent } from '../../user/user.component';
+import { usuario } from '../../interface/user';
+import { ClientComponent } from '../../client/client.component';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, HttpClientModule, UserComponent],
+  imports: [ReactiveFormsModule, CommonModule, HttpClientModule, ClientComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

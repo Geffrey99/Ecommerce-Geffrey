@@ -3,7 +3,7 @@ import { CommonModule, ViewportScroller } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductService } from '../../services/features/product.service';
-import { Product } from '../../services/features/Product';
+import { Product } from '../../interface/Product';
 import { PhotoProductService } from '../../services/PhotoProduct.service';
 import { catchError, of, switchMap, throwError } from 'rxjs';
 import { HeaderComponent } from "../../shared/header/header.component";

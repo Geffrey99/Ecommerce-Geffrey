@@ -1,25 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { ChangeDetectorRef } from '@angular/core';
-import { LoginService } from '../services/auth/auth.service';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { usuario } from '../../interface/user';
+import { LoginService } from '../../services/auth/auth.service';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { ProductComponent } from '../../client/product/product.component';
 import { RouterModule } from '@angular/router';
-import { HeaderComponent } from '../shared/header/header.component';
-import { usuario } from '../services/auth/user';
-import { ProductComponent } from '../features/product/product.component';
+
 @Component({
-  selector: 'app-user',
+  selector: 'app-header-cliente',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, RouterModule, ProductComponent],
-  templateUrl: './user.component.html',
-  styleUrl: './user.component.css'
+  imports: [CommonModule,ProductComponent, RouterModule],
+  templateUrl: './header-cliente.component.html',
+  styleUrl: './header-cliente.component.css'
 })
-export class UserComponent implements OnInit{
+export class HeaderClienteComponent  implements OnInit{
   userLoginOn: boolean = false;
   userData?: usuario;
-
-  constructor(private loginService: LoginService,
-              private changeDetectorRef: ChangeDetectorRef
+  
+  constructor(
+    private loginService: LoginService,
+    private changeDetectorRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../services/features/cart.service';
-import { Product } from '../../services/producto';
+import { Product } from '../../interface/producto';
 import { CurrencyPipe } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { FormBuilder } from '@angular/forms';

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {  HeaderComponent } from '../shared/header/header.component';
 import { RouterModule } from '@angular/router';
-import { ProductComponent } from '../features/product/product.component';
+import { ProductComponent } from '../client/product/product.component';
 @Component({
     selector: 'app-home',
     standalone: true,
@@ -11,5 +11,6 @@ import { ProductComponent } from '../features/product/product.component';
     imports: [ CommonModule, HeaderComponent, ProductComponent, RouterModule]
 })
 export class HomeComponent {
+
 
 }

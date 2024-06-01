@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, ImageLoader } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { UserComponent } from '../../user/user.component';
-import { ProductComponent } from '../../features/product/product.component';
+
+import { ProductComponent } from '../../client/product/product.component';
 @Component({
   selector: 'app-header',
   standalone: true,
