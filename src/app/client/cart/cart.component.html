@@ -1,28 +1,42 @@
-<p>cart works!</p>
-<div class="container">
-    <h2>Carrito de Compras</h2>
-    <div *ngIf="cart.length === 0">Tu carrito está vacío</div>
-    <div *ngFor="let product of cart">
-        <div>{{ product.name }}</div>
-        <div>{{ product.price | currency }}</div>
+<!-- Componente de carrito de compras OkokKOK-->
+<div class="container my-4">
+  <div class="row">
+    <div class="col-md-8">
+      <h2>Carrito de Compras</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Categoria</th>
+            <th>Precio</th>
+            <th>-----</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="cart.length === 0">
+          <td colspan="4">Tu carrito está vacío</td>
+          </tr>
+          <tr *ngFor="let product of cart">
+            <td>{{ product.name }}</td>
+            <td>{{ product.category?.name  }}</td>
+            <td>{{ product.price | currency }}</td>
+            <td><button class="btn btn-danger btn-sm" (click)="removeProduct(product)">X</button></td>
+          </tr>
+        <tr>
+          <td colspan="2" class="text-right">
+            <strong>Total</strong>
+          </td>
+          <td class="text-success">
+            {{getTotal() | currency}}
+          </td>
+          <td> ✔️</td>
+        </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-sucess" (click)="mostrarCheckout = true">Confirmar Compra</button>
     </div>
+    <div class="col-md-4" *ngIf="mostrarCheckout">
+      <cliente-checkout></cliente-checkout>
+    </div>
+  </div>
 </div>
-<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
-    <div>
-    <label for="name">
-      Nombre
-    </label>
-    <input id="name" type="text" formControlName="name">
-  </div>
-
-  <div>
-    <label for="address">
-        Dirección
-    </label>
-    <input id="address" type="text" formControlName="address">
-  </div>
-
-  <button class="button" type="submit">Enviar</button>
-
-
-</form>

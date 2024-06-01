@@ -15,8 +15,8 @@ import { clientRoutes } from './client/client.routes';
 export const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'iniciar-sesion', component: LoginComponent },
-  { path: 'app-products', component: ProductComponent },
-  { path: 'product/:id', component: DetailComponent },
+  // { path: 'app-products', component: ProductComponent },
+  // { path: 'product/:id', component: DetailComponent },
   { path: 'app-user', component: ClientComponent, canActivate: [AuthGuard], children: clientRoutes },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard], children: adminRoutes },
   { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },

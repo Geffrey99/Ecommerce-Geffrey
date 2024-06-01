@@ -7,7 +7,9 @@ import { ProductComponent } from '../client/product/product.component';
 
 
 export const clientRoutes: Routes = [
-
   { path: 'products', component: ProductComponent },
+  { path: 'product/:id', component: DetailComponent },
+  { path: 'cart', component: CartComponent },
+  { path: 'checkout', component: CheckoutComponent },
   { path: 'cliente', redirectTo: 'admin', pathMatch: 'full'}
 ];

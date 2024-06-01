@@ -1,0 +1,23 @@
+.container {
+    max-width:1200px
+}
+
+.table {
+    margin-top:1rem;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+@media (max-width: 768px) {
+    .container {
+       padding: 0 15px;
+    }
+    .col-md-8, .col-md-4 {
+        padding: 0;
+        margin-bottom: 1rem;
+    }
+}

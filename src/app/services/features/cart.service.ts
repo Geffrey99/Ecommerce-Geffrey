@@ -7,6 +7,9 @@ import { BehaviorSubject } from 'rxjs';
     providedIn: 'root'
 })
 export class CartService {
+//   updateCart(cart: import("../../interface/producto").Product[]) {
+//     throw new Error('Method not implemented.');
+//   }
     private cart: Product[] = [];
     private cartSubject = new BehaviorSubject<Product[]>([]);
     items:Product[] = [];
@@ -43,5 +46,8 @@ getItems() {
   }
 
   
+  updateCart(newCart: Product[]): void {
+    this.cartSubject.next(newCart);
+  }
 
 }
