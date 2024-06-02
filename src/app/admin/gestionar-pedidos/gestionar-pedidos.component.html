@@ -1,1 +1,37 @@
 <p>gestionar-pedidos works!</p>
+
+<div class="container">
+    <div class="container">
+        <div class="btn-group">
+          <button class="btn btn-info" (click)="filterOrders('PENDIENTE')">Pendientes</button>
+          <button class="btn btn-success" (click)="filterOrders('Enviado')">Enviados</button>
+          <button class="btn btn-danger" (click)="filterOrders('Cancelado')">Cancelados</button>
+        </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Fecha</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let order of filteredOrders">
+        <td>{{ order.id }}</td>
+        <td>{{ order.fechaCompra | date }}</td>
+        <td>{{ order.estado }}</td>
+        <td>
+            <select #statusSelect class="form-select" (change)="updateSelectedStatus(order.id, statusSelect.value)">
+                <option [value]="order.estado" selected>{{ order.estado }}</option>
+                <option value="Enviado">Enviado</option>
+                <option value="Cancelado">Cancelado</option>
+              </select>
+            </td>
+            <td>
+              <button class="btn btn-primary" (click)="changeOrderStatus(order.id)">Enviar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>

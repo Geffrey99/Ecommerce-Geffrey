@@ -1,0 +1,45 @@
+<p>detalles-compras works!</p>
+<div class="container mt-3">
+    <h2>Ordenes de compra</h2>
+    <table class="table"> 
+        <thead> 
+            <tr>
+                <th>Id</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let order of orders" >
+                <td>{{order.id}}</td>
+                <td>{{order.fechaCompra | date }}</td>
+                <td>{{order.estado}}</td>
+                <td>
+                  <button class="btn btn-primary" (click)="showOrderDetails(order.id)">Ver detalles</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="selectedOrderDetails" class="mt-4">
+    <h3> Detalles de la orden </h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let detail of selectedOrderDetails">
+                <td>{{detail.productName}}</td>
+                <td>{{detail.cantidad}}</td>
+                <td>{{detail.precio | currency:'EUR'}}</td>
+                <td>{{(detail.cantidad * detail.precio) | currency:'EUR'}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

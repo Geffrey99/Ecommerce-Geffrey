@@ -19,8 +19,6 @@ mostrarCheckout: boolean = false;
   constructor(private cartService: CartService,
              ) {}
  
-items = this.cartService.getItems();
-
 
 
   ngOnInit(): void {
@@ -34,8 +32,7 @@ items = this.cartService.getItems();
   }
 
   removeProduct( productoEliminar: Product ): void {
-      this.cart = this.cart.filter(product => product.id! !== productoEliminar.id); 
-        this.cartService.updateCart(this.cart);
+    const newCart = this.cart.filter(product => product.id !== productoEliminar.id);
+    this.cartService.updateCart(newCart);
   }
-
 }

@@ -1,5 +1,5 @@
-<!-- Componente de carrito de compras OkokKOK-->
-<div class="container my-4">
+<!-- Componente de carrito de compras OKokoK-->
+<div class="container">
   <div class="row">
     <div class="col-md-8">
       <h2>Carrito de Compras</h2>
@@ -36,6 +36,7 @@
       <button class="btn btn-sucess" (click)="mostrarCheckout = true">Confirmar Compra</button>
     </div>
     <div class="col-md-4" *ngIf="mostrarCheckout">
+      <!-- Componente para hacer la compra OKokoK-->
       <cliente-checkout></cliente-checkout>
     </div>
   </div>
