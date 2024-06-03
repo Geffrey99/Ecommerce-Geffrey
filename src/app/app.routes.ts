@@ -18,6 +18,4 @@ export const routes: Routes = [
 
 ];
      
-  // { path: 'app-products', component: ProductComponent },
-  // { path: 'product/:id', component: DetailComponent },
-  // { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
+//El home component redirige a la vista de login ---> Y a su vez admin o client redirigen a sus respectivas vistas
