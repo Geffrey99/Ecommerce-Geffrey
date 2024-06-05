@@ -1,4 +1,4 @@
-    <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" class="p-4">
+    <!-- <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" class="p-4">
       <div class="mb-3">
         <label for="name" class="form-label">Nombre</label>
         <input id="name" type="text" formControlName="name" class="form-control">
@@ -11,4 +11,76 @@
     
       <button class="btn btn-primary" type="submit">Enviar</button>
     </form>
+     -->
+<!--    max-width: -webkit-fill-available;-->
+
+     <div class="container">
+      <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" class="p-4">
+        <div class="row">
+          <!-- Billing Address Section -->
+          <div class="col">
+            <h3 class="title">Dirección de facturación</h3>
+            <div class="inputBox">
+              <label for="fullName">Nombre completo:</label>
+              <input id="fullName" type="text" formControlName="fullName" placeholder="John Doe" class="form-control" [class.is-invalid]="checkoutForm.get('fullName')?.invalid && checkoutForm.get('fullName')?.touched">
+            </div>
+            <div class="inputBox">
+              <label for="email">Correo electrónico:</label>
+              <input id="email" type="email" formControlName="email" placeholder="ejemplo@ejemplo.com" class="form-control" [class.is-invalid]="checkoutForm.get('email')?.invalid && checkoutForm.get('email')?.touched">
+            </div>
+            <div class="inputBox">
+              <label for="address">Dirección:</label>
+              <input id="address" type="text" formControlName="address" placeholder="Calle - Localidad" class="form-control" [class.is-invalid]="checkoutForm.get('address')?.invalid && checkoutForm.get('address')?.touched"> 
+            </div>
+            <div class="inputBox">
+              <label for="city">Ciudad:</label>
+              <input id="city" type="text" formControlName="city" placeholder="Ciudad" class="form-control" [class.is-invalid]="checkoutForm.get('city')?.invalid && checkoutForm.get('city')?.touched"> 
+            </div>
+            <div class="flex">
+              <div class="inputBox">
+                <label for="state">Estado:</label>
+                <input id="state" type="text" formControlName="state" placeholder="Estado" class="form-control" [class.is-invalid]="checkoutForm.get('state')?.invalid && checkoutForm.get('state')?.touched"> 
+              </div>
+              <div class="inputBox">
+                <label for="zip">Código postal:</label>
+                <input id="zip" type="text" formControlName="zip" placeholder="123456" class="form-control" [class.is-invalid]="checkoutForm.get('zip')?.invalid && checkoutForm.get('zip')?.touched"> 
+              </div>
+            </div>
+          </div>
+          <!-- Payment Section -->
+          <div class="col">
+            <h3 class="title">Pago</h3>
+            <div class="inputBox">
+              <span>Tarjetas aceptadas:</span>
+              <!-- Aquí puedes insertar tu imagen con una directiva de Angular si es necesario -->
+              <img src="assets/img/card_img.png" alt="Tarjetas Aceptadas">
+            </div>
+            <div class="inputBox">
+              <label for="cardName">Nombre en la tarjeta:</label>
+              <input id="cardName" type="text" formControlName="cardName" placeholder="Sr. John Doe" class="form-control" [class.is-invalid]="checkoutForm.get('cardName')?.invalid && checkoutForm.get('cardName')?.touched"> 
+            </div>
+            <div class="inputBox">
+              <label for="cardNumber">Número de tarjeta de crédito:</label>
+              <input id="cardNumber" type="text" formControlName="cardNumber" placeholder="1111-2222-3333-4444" class="form-control" [class.is-invalid]="checkoutForm.get('cardNumber')?.invalid && checkoutForm.get('cardNumber')?.touched"> 
+            </div>
+            <div class="inputBox">
+              <label for="expMonth">Mes de expiración:</label>
+              <input id="expMonth" type="text" formControlName="expMonth" placeholder="Enero" class="form-control" [class.is-invalid]="checkoutForm.get('expMonth')?.invalid && checkoutForm.get('expMonth')?.touched"> 
+            </div>
+            <div class="flex">
+              <div class="inputBox">
+                <label for="expYear">Año de expiración:</label>
+                <input id="expYear" type="text" formControlName="expYear" placeholder="2024" class="form-control" [class.is-invalid]="checkoutForm.get('expYear')?.invalid && checkoutForm.get('expYear')?.touched"> 
+              </div>
+              <div class="inputBox">
+                <label for="cvv">CVV:</label>
+                <input id="cvv" type="text" formControlName="cvv" placeholder="1234" class="form-control" [class.is-invalid]="checkoutForm.get('cvv')?.invalid && checkoutForm.get('cvv')?.touched"> 
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Proceder al pago</button>
+        
+      </form>
+    </div>
     
