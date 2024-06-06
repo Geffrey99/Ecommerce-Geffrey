@@ -7,7 +7,8 @@ import { LoginService } from '../../services/auth/auth.service';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { DialogComponent } from '../dialog/dialog.component';
+import { DialogComponent } from '../dialog-error/dialog.component';
+import { DialogSuccessComponent } from '../dialog-success/dialog-success.component';
 
 @Component({
   selector: 'cliente-checkout',
@@ -34,6 +35,7 @@ export class CheckoutComponent {
     expYear: ['', [Validators.required, Validators.min(new Date().getFullYear())]],
     cvv: ['', [Validators.required, Validators.pattern('^[0-9]{3,4}$')]] // CVV de 3 o 4 dígitos
   });
+  router: any;
 
 constructor(private formBuilder: FormBuilder,
   private cartService: CartService,
@@ -88,24 +90,22 @@ constructor(private formBuilder: FormBuilder,
         next: (order) => {
           // Manejar la respuesta exitosa
           console.warn('Te llegará a tu correo el ticket: ', order);
+          this.showSuccesModal('Enviando...'); 
           // Redirigir al usuario o mostrar un mensaje de éxito
         },
         error: (error) => {
           // Manejar el error
           console.error('Error al realizar la compra', error);
+          this.showErrorModal('Ha ocurrido un error al procesar tu pedido.');
           // Mostrar un mensaje de error al usuario
         }
-      });
-  
+      }); 
       // Resetea el formulario después de enviar los datos
       this.checkoutForm.reset();
-      // Limpia el carrito de compras si es necesario
-      // this.cartService.clearCart();
+      // Todo ok, limpia el carrito
+      this.cartService.clearCart();
     } else {
-      // Si el formulario no es válido, puedes manejar este caso como prefieras
-      // Por ejemplo, mostrar un mensaje al usuario indicando que debe completar el formulario correctamente
-      console.error('Por favor, completa el formulario correctamente antes de enviar.');
-      this.showErrorModal('Por favor, completa el formulario correctamente antes de enviar.')
+      this.showErrorModal('Por favor, completa el formulario correctamente antes de proceder al pago.')
     }
   }
 
@@ -116,9 +116,30 @@ constructor(private formBuilder: FormBuilder,
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('El modal se ha cerrado');
-      // Aquí puedes manejar lo que sucede después de que el modal se cierra
+      console.log('El modal se ha cerrado'); // despues de que se cierre el modal....
     });
   }
+
+
+  showSuccesModal(message: string): void {
+    const dialogRef: MatDialogRef<DialogSuccessComponent> = this.dialog.open(DialogSuccessComponent, {
+      data: { message: message }
+    });
+
+    setTimeout(() => {
+      dialogRef.close();
+      this.checkoutForm.reset(); // Resetea el formulario
+      this.cartService.clearCart(); // Limpia el carrito
+      this.router.navigate(['/pagina-de-confirmacion']); // Redirige a la página de confirmación
+    }, 5000);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('El modal se ha cerrado');
+      // Aquí puedes poner cualquier lógica adicional que necesites después de cerrar el modal
+    });
+  }
+
+
+
 }
 

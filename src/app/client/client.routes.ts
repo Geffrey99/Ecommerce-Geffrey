@@ -1,4 +1,5 @@
 // client.routes.ts
+
 import { Routes } from '@angular/router';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { CartComponent } from './cart/cart.component';
@@ -12,5 +13,5 @@ export const clientRoutes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'mis-pedidos', component: DetallesComprasComponent },
-  { path: 'cliente', redirectTo: 'admin', pathMatch: 'full'}
+  { path: 'cliente', redirectTo: 'client', pathMatch: 'full'}
 ];

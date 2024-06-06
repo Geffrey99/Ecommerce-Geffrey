@@ -58,3 +58,15 @@
   .contact-info a {
     padding-right: 0;
   }
+
+  .cart:hover i {
+    cursor: pointer; /* Cambia el cursor a una mano al pasar por encima */
+    /* Aquí puedes agregar más estilos para cuando el ratón esté encima, como un cambio de color o un efecto */
+  }
+
+  .active {
+    cursor: pointer;
+    color: #0275d8; /* Cambia el color al pasar por encima */
+    transform: scale(1.1); /* Aumenta ligeramente el tamaño para dar un efecto de resalte */
+    transition: all 0.3s ease; /
+  }
