@@ -11,6 +11,13 @@ export interface Product {
     name: string;
   };
 }
+
+
+
+
+
+
+
 // export interface Product {
 //   id?: number;
 //   description?: string;

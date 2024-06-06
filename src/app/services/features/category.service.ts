@@ -1,22 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Product } from '../../interface/Product';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Category } from '../../interface/Category';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class CategoryService {
- private baseUrl = 'http://localhost:8081/api/categories'; // Asegúrate de que la URL sea correcta
+  private baseUrl = 'http://localhost:8081/api/categories'; // Asegúrate de que la URL sea correcta
+  private selectedCategorySource = new BehaviorSubject<Category | undefined>(undefined);
+  selectedCategory$ = this.selectedCategorySource.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  // ... tus otros métodos ...
+  getCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(this.baseUrl);
+  }
 
-
-
-
-  getProductsByCategory(categoryId: number): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.baseUrl}/by-category/${categoryId}`);
+  selectCategory(category: Category): void {
+    this.selectedCategorySource.next(category);
   }
 }

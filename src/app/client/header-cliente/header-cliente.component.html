@@ -12,10 +12,22 @@
           <li class="nav-item">
             <a class="nav-link" aria-current="page" routerLink="/app-user" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Online Geffrey</a>
           </li>
+          <li *ngFor="let category of categories">
+            <a [routerLink]="['/app-user/category', category.name]">{{ category.name }}</a>
+          </li>
+            <!-- <li class="nav-item">
+            <a class="nav-link" aria-current="page" routerLink="/app-user/moviles" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Moviles</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" routerLink="/app-user/portatiles" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Portátiles</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" routerLink="/app-user/accesorios" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Accesorios</a>
+          </li> -->
           <!-- <li class="nav-item">
             <a class="nav-link active" aria-current="page" routerLink="/app-user">Todas las categorias</a>
           </li> -->
-          <li class="nav-item dropdown">
+          <!-- <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Portátiles
             </a>
@@ -43,7 +55,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link">Accesorios</a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link" aria-current="page"  routerLink="/app-user/mis-pedidos" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Mis pedidos</a>
           </li>
