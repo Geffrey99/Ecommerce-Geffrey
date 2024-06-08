@@ -35,4 +35,16 @@ mostrarCheckout: boolean = false;
     const newCart = this.cart.filter(product => product.id !== productoEliminar.id);
     this.cartService.updateCart(newCart);
   }
+
+  existenProductos(): boolean {
+    return this.cart.length > 0;
+  }
+  
+  cancelarCompra(): void {
+    this.mostrarCheckout = false;
+  }
+  manejarCancelarCompra(): void {
+    this.mostrarCheckout = false; // Esto ocultará el componente de checkout
+    // Aquí puedes reactivar las funciones del carrito si es necesario
+  }
 }

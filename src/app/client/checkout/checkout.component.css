@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
 
 *{
   font-family: 'Poppins', sans-serif;
@@ -94,11 +94,95 @@
 
 .has-error input {
     border-color: #dc3545; /* Rojo de error */
-  }
+  /* }
   
   .error-message {
     color: #dc3545; /* Rojo de error */
-    font-size: 0.875em;
+    /* font-size: 0.875em;
     margin-top: 0.25rem;
-  }
+  /* } */  
   
+  
+/* .container form .submit-btn:hover{
+  background: #2ecc71;
+} */
+/* Estilos generales del formulario */
+.container {
+  background-color: #f7f7f7; /* Color de fondo del formulario */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos de los títulos de las secciones */
+.title {
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+/* Estilos de las cajas de entrada */
+.inputBox {
+  margin-bottom: 15px;
+}
+
+/* Estilos de los inputs */
+.inputBox input[type="text"],
+.inputBox input[type="email"],
+.inputBox input[type="password"] {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  width: 100%;
+  transition: border-color 0.3s;
+}
+
+/* Estilo de los inputs al enfocar */
+.inputBox input[type="text"]:focus,
+.inputBox input[type="email"]:focus,
+.inputBox input[type="password"]:focus {
+  border-color: #007bff; /* Color al seleccionar el input */
+}
+
+/* Estilos de los botones */
+.btn {
+  padding: 10px 20px;
+  border-radius: 4px;
+  margin-right: 10px; /* Separación entre botones */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Estilo del botón al pasar el mouse */
+.btn:hover {
+  background-color: #0056b3;
+  color: #fff;
+}
+
+/* Estilo de los botones primarios */
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+}
+
+/* Estilo de los botones cuando están deshabilitados */
+.btn:disabled {
+  background-color: #ccc;
+  color: #666;
+}
+
+/* Estilo para cuando los inputs son inválidos */
+.is-invalid {
+  border-color: #dc3545;
+}
+
+/* Estilo para la sección de flexión */
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Estilo para las imágenes de tarjetas aceptadas */
+/* .inputBox img {
+  margin-top: 10px;
+  height: 24px;
+} */

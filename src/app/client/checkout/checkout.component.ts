@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CartService } from '../../services/features/cart.service';
@@ -9,7 +9,7 @@ import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog-error/dialog.component';
 import { DialogSuccessComponent } from '../dialog-success/dialog-success.component';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'cliente-checkout',
   standalone: true,
@@ -17,8 +17,9 @@ import { DialogSuccessComponent } from '../dialog-success/dialog-success.compone
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css'
 })
-export class CheckoutComponent {
+export class CheckoutComponent implements OnInit {
   userId: number | undefined;
+
 
   checkoutForm = this.formBuilder.group({
     fullName: ['', [Validators.required, Validators.minLength(5)]],
@@ -35,13 +36,14 @@ export class CheckoutComponent {
     expYear: ['', [Validators.required, Validators.min(new Date().getFullYear())]],
     cvv: ['', [Validators.required, Validators.pattern('^[0-9]{3,4}$')]] // CVV de 3 o 4 dígitos
   });
-  router: any;
+  // router: any;
 
 constructor(private formBuilder: FormBuilder,
   private cartService: CartService,
   private orderService: OrderService,
   private loginService: LoginService,
-  public dialog: MatDialog
+  public dialog: MatDialog,
+  private router: Router,
 
 )  {}
 
@@ -57,6 +59,27 @@ constructor(private formBuilder: FormBuilder,
         }
       }
     });
+     // Llamada al método para autorellenar el formulario con datos del localStorage
+  this.autorellenarFormulario();
+}
+
+autorellenarFormulario(): void {
+  // Obtener la información del cliente de localStorage
+  const clienteInfo = JSON.parse(localStorage.getItem('user')!);
+
+  // Si existe información del cliente, establecer los valores del formulario
+  if (clienteInfo) {
+    this.checkoutForm.patchValue({
+      fullName: `${clienteInfo.nombre} ${clienteInfo.apellido}` || '',
+      email: clienteInfo.email || '',
+      address: clienteInfo.direccionEnvio || '',
+      city: clienteInfo.localidad?.nombre || '',
+      state: clienteInfo.localidad?.provincia?.nombre || '',
+      zip: clienteInfo.localidad?.codigoPostal || '',
+      // No autorellenar información sensible de la tarjeta
+    });
+  }
+
   }
 
   getErrorMessage(controlName: string): string {
@@ -130,7 +153,7 @@ constructor(private formBuilder: FormBuilder,
       dialogRef.close();
       this.checkoutForm.reset(); // Resetea el formulario
       this.cartService.clearCart(); // Limpia el carrito
-      this.router.navigate(['/pagina-de-confirmacion']); // Redirige a la página de confirmación
+      this.router.navigate(['/app-user/mis-pedidos']); // Redirige a la página de confirmación
     }, 5000);
 
     dialogRef.afterClosed().subscribe(result => {
@@ -139,7 +162,15 @@ constructor(private formBuilder: FormBuilder,
     });
   }
 
+  @Output() cancelarCompraEvent = new EventEmitter();
+
+  cancelarCompra(): void {
+    this.cancelarCompraEvent.emit(); // Emitir el evento al hacer clic en "Cancelar compra"
+  }
+
+
+
+
 
 
 }
-

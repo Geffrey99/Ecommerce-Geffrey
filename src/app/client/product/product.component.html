@@ -10,13 +10,18 @@
     <div class="search">
       <input type="text" (input)="onSearch($event)" placeholder="Buscar por nombre...">
     </div>
-  </div>
+  </div>       
 
 
 <section class="py-2">
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
         <!-- Aquí comienza el bucle para mostrar los productos -->
+        <div *ngIf="filteredProducts.length === 0" class="alert alert-info text-center" role="alert">
+          Aún no contamos con ese producto...
+          <img src="assets/spinner.svg" alt="Cargando..." width="170px"/>
+        </div>
+     
         <div class="col mb-5" *ngFor="let product of filteredProducts | paginate: { itemsPerPage: 12, currentPage: p }">
           <div class="card h-100">
             <!-- Product image-->

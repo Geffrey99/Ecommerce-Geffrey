@@ -24,7 +24,6 @@ export class OrderService {
     return this.http.get<any>(`${this.baseUrl}/${orderId}/details`);
   }
 
-  // Cambiar el estado de una orden
   updateOrderStatus(orderId: number, status: string): Observable<any> {
     const params = new HttpParams().set('status', status);
   return this.http.put<any>(`${this.baseUrl}/${orderId}/status`, null, { params });

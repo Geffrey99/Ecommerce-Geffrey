@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { Product } from '../../interface/producto';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { CategoryService } from '../../services/features/category.service';
+
 @Component({
   selector: 'app-product',
   standalone: true,

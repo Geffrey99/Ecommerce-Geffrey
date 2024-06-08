@@ -1,45 +1,87 @@
-<p>detalles-compras works!</p>
+<!-- <div class="tabs">
+  <button (click)="cambiarEstadoActivo('Todos')">Todos</button>
+  <button (click)="cambiarEstadoActivo('PENDIENTE')">Pendiente</button>
+  <button (click)="cambiarEstadoActivo('Enviado')">Enviado</button>
+  <button (click)="cambiarEstadoActivo('Recibido')">Recibido</button>
+</div> -->
 <div class="container mt-3">
-    <h2>Ordenes de compra</h2>
-    <table class="table"> 
-        <thead> 
+    <div class="row">
+      <!-- Columna de órdenes de compra -->
+      <div class="col-md-6">
+        <h6>Historial de mis pedidos 🛍️</h6>
+        <div class="tabs">
+          <button (click)="cambiarEstadoActivo('Todos')">Todos</button>
+          <button (click)="cambiarEstadoActivo('PENDIENTE')">Pendiente</button>
+          <button (click)="cambiarEstadoActivo('Enviado')">Enviado</button>
+          <button (click)="cambiarEstadoActivo('Recibido')">Recibido</button>
+        </div>
+        <table class="table">
+          <thead>
             <tr>
-                <th>Id</th>
-                <th>Fecha</th>
-                <th>Estado</th>
-                <th>Acciones</th>
+              <!-- <th>Id</th> -->
+              <th>Fecha</th>
+              <th>Estado</th>
+              <th>Acciones</th>
             </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let order of orders" >
-                <td>{{order.id}}</td>
-                <td>{{order.fechaCompra | date }}</td>
-                <td>{{order.estado}}</td>
-                <td>
-                  <button class="btn btn-primary" (click)="showOrderDetails(order.id)">Ver detalles</button>
-                </td>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of ordersFiltrados | paginate:{ itemsPerPage:5, currentPage:p}">
+              <!-- <td>{{ order.id }}</td> -->
+              <td>{{ order.fechaCompra | date }}</td>
+              <td [ngClass]="{'enviado': order.estado === 'Enviado'}">
+                <!-- Integración del select directamente en el td -->
+                <ng-container *ngIf="order.estado === 'Enviado'; else notSent">
+                  <select #statusSelect (change)="changeOrderStatus(order.id, statusSelect.value)">
+                    <option value="Enviado" selected>Enviado</option>
+                    <option value="Recibido">Recibido</option>
+                  </select>
+                </ng-container>
+                <ng-template #notSent>{{ order.estado }}</ng-template>
+              </td>
+              <td>
+                <!-- <button *ngIf="order.estado !== 'Enviado'" class="btn btn-primary" (click)="showOrderDetails(order.id)">Ver detalles</button> -->
+                <button class="btn btn-primary" (click)="showOrderDetails(order.id)">Ver detalles</button>
+              </td>
             </tr>
-        </tbody>
-    </table>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </tbody>
+        
+        </table>
+      </div>
 
-    <div *ngIf="selectedOrderDetails" class="mt-4">
-    <h3> Detalles de la orden </h3>
-    <table class="table">
-        <thead>
+      <!-- Columna de detalles de la orden -->
+      <div class="col-md-6">
+      <div *ngIf="selectedOrderDetails; else verAnimacion">
+        <h6>Detalles de la compra </h6>
+        <button class="btn btn-secondary" (click)="closeOrderDetails()">Cerrar</button>
+        <table class="table">
+          <thead>
             <tr>
-                <th>Producto</th>
-                <th>Cantidad</th>
-                <th>Precio</th>
-                <th>Subtotal</th>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Precio</th>
+              <th>Subtotal</th>
             </tr>
-        </thead>
-        <tbody>
+          </thead>
+          <tbody>
             <tr *ngFor="let detail of selectedOrderDetails">
-                <td>{{detail.productName}}</td>
-                <td>{{detail.cantidad}}</td>
-                <td>{{detail.precio | currency:'EUR'}}</td>
-                <td>{{(detail.cantidad * detail.precio) | currency:'EUR'}}</td>
+              <td>{{ detail.productName || 'No hay detalles'}}</td>
+              <td>{{ detail.cantidad || 'Nada' }}</td>
+              <td>{{ detail.precio | currency:'EUR' }}</td>
+              <td>{{ (detail.cantidad * detail.precio) | currency:'EUR' }}</td>
             </tr>
-        </tbody>
-    </table>
+          </tbody>
+        </table>
+      </div>
+      <ng-template #verAnimacion>
+        <div class="text-center">
+          <img src="assets/spinner.svg" alt="Cargando..." width="170px"/>
+        </div>
+        <hr>
+        <h3 class="text-center" > OnlineGeffrey lo mas fiable </h3>
+        </ng-template>
+    </div>
+  </div>
 </div>
+
+

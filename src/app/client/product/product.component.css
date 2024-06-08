@@ -1,6 +1,6 @@
 .card-img-top {
-    width: 100%; /* Asegura que la imagen cubra el ancho del contenedor */
-    height: 200px; /* Altura fija para todas las imágenes */
+    width: 100%; /* Asegura que la imagen cubra el ancho del contenedor*/
+    height: 200px; /* Altura fija para todas las imágenes  */
     object-fit: cover; /* Asegura que la imagen cubra el espacio sin distorsionarse */
   }
 /*   

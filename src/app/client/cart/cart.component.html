@@ -20,7 +20,7 @@
             <td>{{ product.name }}</td>
             <td>{{ product.category?.name  }}</td>
             <td>{{ product.price | currency }}</td>
-            <td><button class="btn btn-danger btn-sm" (click)="removeProduct(product)">X</button></td>
+            <td><button class="btn btn-danger btn-sm" (click)="removeProduct(product)" [disabled]="mostrarCheckout">X</button></td>
           </tr>
         <tr>
           <td colspan="2" class="text-right">
@@ -33,13 +33,11 @@
         </tr>
         </tbody>
       </table>
-      <button class="btn btn-sucess" (click)="mostrarCheckout = true">Confirmar Compra</button> -->
-     <!-- href="/app-user">
-  <button class="btn btn-sucess" href="/app-user/checkout">Confirmar Compra</button> -->
+      <button class="btn btn-sucess" [disabled]="!existenProductos()" (click)="mostrarCheckout = true">Confirmar Compra</button> 
     </div>
     <div class="col-md-6" *ngIf="mostrarCheckout">
-      <!-- Componente para hacer la compra OKokoK-->
-      <cliente-checkout></cliente-checkout>
+      <cliente-checkout (cancelarCompraEvent)="manejarCancelarCompra()">
+      </cliente-checkout>
     </div>
   </div>
 </div>
