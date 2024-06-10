@@ -7,7 +7,7 @@ import { Category } from '../../interface/Category';
   providedIn: 'root'
 })
 export class CategoryService {
-  private baseUrl = 'http://localhost:8081/api/categories'; // Asegúrate de que la URL sea correcta
+  private baseUrl = 'http://localhost:8081/api/categories'; 
   private selectedCategorySource = new BehaviorSubject<Category | undefined>(undefined);
   selectedCategory$ = this.selectedCategorySource.asObservable();
 

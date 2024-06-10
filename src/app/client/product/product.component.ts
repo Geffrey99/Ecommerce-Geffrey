@@ -1,10 +1,11 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductService } from '../../services/features/product.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { Product } from '../../interface/producto';
 import { NgxPaginationModule } from 'ngx-pagination';
+
+import { ProductService } from '../../services/features/product.service';
+import { Product } from '../../interface/producto';
 
 @Component({
   selector: 'app-product',
@@ -23,6 +24,7 @@ export class ProductComponent implements OnInit {
   // currentSortO: string = 'invalid'; // Valor predeterminado que indica una opción no válida
   searchQuery: string = ''; // Propiedad para almacenar la consulta de búsqueda
   private imageBaseUrl = 'http://localhost:8081/api/product-images/';
+
   constructor(
     private productService: ProductService, 
   ) { }

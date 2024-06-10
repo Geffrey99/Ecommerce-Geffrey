@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { OrderService } from '../../services/features/order.service';
-import { LoginService } from '../../services/auth/auth.service';
 import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
+
+import { OrderService } from '../../services/features/order.service';
+import { LoginService } from '../../services/auth/auth.service';
+
 @Component({
   selector: 'app-detalles-compras',
   standalone: true,
@@ -16,6 +18,10 @@ export class DetallesComprasComponent {
   selectedOrderDetails: any | undefined;
   orderDetails: any | undefined;
   p: number = 1;
+  estadoActivo: string = 'Todos'; // Estado inicial que muestra todos los pedidos
+  ordersFiltrados = [...this.orders];
+
+  selectedStatus: { [key: number]: string } = {}; 
 
   constructor(
     private orderService: OrderService,
@@ -60,7 +66,7 @@ export class DetallesComprasComponent {
   closeOrderDetails(): void {
     this.selectedOrderDetails = null;
   }
-  selectedStatus: { [key: number]: string } = {}; 
+
 
   changeOrderStatus(orderId: number, newStatus: string): void {
     this.orderService.updateOrderStatus(orderId, newStatus).subscribe({
@@ -80,8 +86,6 @@ export class DetallesComprasComponent {
     });
   }
 
-  estadoActivo: string = 'Todos'; // Estado inicial que muestra todos los pedidos
-  ordersFiltrados = [...this.orders];
 
 // Método para cambiar el estado activo y filtrar la lista de pedidos
 cambiarEstadoActivo(nuevoEstado: string): void {

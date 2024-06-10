@@ -27,6 +27,7 @@ export class LoginService {
       tap((response) => {
         const userData = response.usuario;
         const userRole = userData.rol; 
+        // delete userData.contraseña; // Eliminar la contraseña de userData
         this.setCurrentUser(userData);
         localStorage.setItem('user', JSON.stringify(userData));
         localStorage.setItem('userRole', userRole); 

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoryService } from '../../services/features/category.service';
-import { Category } from '../../interface/Category';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
+
+import { CategoryService } from '../../services/features/category.service';
+import { Category } from '../../interface/Category';
 
 @Component({
   selector: 'app-categorias',
@@ -13,10 +14,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
   styleUrl: './categorias.component.css',
 })
 export class CategoriasComponent implements OnInit {
+
   category: Category | undefined;
-  p: number = 1; // Inicializa la variable p con la página 1 como valor predeterminado
-
-
+  p: number = 1; // Inicializo la variable de la pagina en 1 como valor por defecto
 
   private imageBaseUrl = 'http://localhost:8081/api/product-images/';
   constructor(

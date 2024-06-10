@@ -2,11 +2,13 @@ import { Component} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
+import { filter } from 'rxjs';
+
 import { ProductComponent } from './product/product.component';
 import { HeaderClienteComponent } from './header-cliente/header-cliente.component';
-import { filter } from 'rxjs';
 import { CategoryService } from '../services/features/category.service';
 import { Category } from '../interface/Category';
+
 @Component({
   selector: 'app-client',
   standalone: true,

@@ -19,7 +19,6 @@ export class OrderService {
     return this.http.get<any[]>(`${this.baseUrl}/user/${userId}`);
   }
 
-  // Obtener los detalles de una orden específica
   getOrderDetails(orderId: number): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/${orderId}/details`);
   }

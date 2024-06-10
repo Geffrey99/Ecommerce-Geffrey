@@ -1,11 +1,11 @@
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { CartService } from '../../services/features/cart.service';
-import { Product } from '../../interface/Product';
-import { CurrencyPipe } from '@angular/common';
-import { CommonModule } from '@angular/common';
-import { FormBuilder } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+
+import { CartService } from '../../services/features/cart.service';
 import { CheckoutComponent } from '../checkout/checkout.component';
+import { Product } from '../../interface/Product';
+
 @Component({
   selector: 'app-cart',
   standalone: true,
@@ -15,7 +15,8 @@ import { CheckoutComponent } from '../checkout/checkout.component';
 })
 export class CartComponent implements OnInit {
   cart: Product[] = [];
-mostrarCheckout: boolean = false;
+  mostrarCheckout: boolean = false;
+  
   constructor(private cartService: CartService,
              ) {}
  
@@ -44,7 +45,6 @@ mostrarCheckout: boolean = false;
     this.mostrarCheckout = false;
   }
   manejarCancelarCompra(): void {
-    this.mostrarCheckout = false; // Esto ocultará el componente de checkout
-    // Aquí puedes reactivar las funciones del carrito si es necesario
+    this.mostrarCheckout = false; 
   }
 }

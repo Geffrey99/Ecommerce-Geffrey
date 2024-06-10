@@ -3,11 +3,13 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router'
+import { HttpClientModule } from '@angular/common/http';
+
 import { LoginService } from '../../services/auth/auth.service';
 import { LoginRequest } from '../../interface/loginRequest';
-import { HttpClientModule } from '@angular/common/http';
 import { usuario } from '../../interface/user';
 import { ClientComponent } from '../../client/client.component';
+
 @Component({
   selector: 'app-login',
   standalone: true,

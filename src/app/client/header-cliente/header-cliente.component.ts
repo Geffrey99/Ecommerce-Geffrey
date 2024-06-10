@@ -1,12 +1,12 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { usuario } from '../../interface/user';
-import { LoginService } from '../../services/auth/auth.service';
 import { CommonModule } from '@angular/common';
-import { ProductComponent } from '../../client/product/product.component';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { Product } from '../../interface/Product';
+
+import { ProductComponent } from '../../client/product/product.component';
+import { LoginService } from '../../services/auth/auth.service';
 import { CategoryService } from '../../services/features/category.service';
 import { Category } from '../../interface/Category';
+import { usuario } from '../../interface/user';
 
 @Component({
   selector: 'app-header-cliente',

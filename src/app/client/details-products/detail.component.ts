@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule, ViewportScroller } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CommonModule, ViewportScroller } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { ProductService } from '../../services/features/product.service';
-import { Product } from '../../interface/Product';
-import { PhotoProductService } from '../../services/PhotoProduct.service';
-import { catchError, of, switchMap, throwError } from 'rxjs';
-import { HeaderComponent } from "../../shared/header/header.component";
+
 import { CartService } from '../../services/features/cart.service';
+import { HeaderComponent } from "../../shared/header/header.component";
+import { PhotoProductService } from '../../services/PhotoProduct.service';
+import { Product } from '../../interface/Product';
+import { ProductService } from '../../services/features/product.service';
 
 @Component({
     selector: 'app-detail',
@@ -64,7 +64,7 @@ export class DetailComponent implements OnInit {
       this.cartService.addToCart(product);
       window.alert('Ok, producto añadido al carrito');
     } else {
-      window.alert('Error: Producto no disponible');
+      window.alert('Error: Producto no disponible okok');
     }
   }
 
@@ -79,44 +79,6 @@ export class DetailComponent implements OnInit {
   getFullImageUrl(photoUrl: string): string {
     return `${this.imageBaseUrl}${photoUrl}`;
   }
-
-
-
-
- 
-
-// para cargar imagen de product 
-
-  // selectedFile: File | undefined;
-  // onFileSelected(event: Event) {
-  //   const inputElement = event.target as HTMLInputElement;
-  //   if (inputElement.files && inputElement.files.length > 0) {
-  //     this.selectedFile = inputElement.files[0];
-  //   }
-  // }
-
-  // onSubmit() {
-  //   if (this.productId) { // Obtén el ID del producto según tu lógica
-  //     if (this.selectedFile) {
-  //       this.PhotoProductService.addProductImage(this.productId, this.selectedFile).subscribe(
-  //         response => {
-  //           console.log('Imagen cargada exitosamente');
-  //           // Realiza acciones adicionales si es necesario
-  //         },
-  //         error => {
-  //           console.error('Error al cargar la imagen:', error);
-  //           debugger; // Esta línea detendrá la ejecución y activará el depurador del navegador
-  //           // Maneja el error de carga de la imagen
-  //         }
-  //       );
-  //       debugger;
-  //     } else {
-  //       console.error('No se seleccionó ninguna imagen');
-  //       // Maneja la situación en la que no se selecciona ninguna imagen
-  //     }
-  //   }
-  // }
-
 
   loadSelectedProduct(productId: number): void {
     this.productService.getProductById(productId)

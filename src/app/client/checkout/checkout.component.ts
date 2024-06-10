@@ -1,15 +1,15 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { CartService } from '../../services/features/cart.service';
-import { OrderService } from '../../services/features/order.service';
-import { LoginService } from '../../services/auth/auth.service';
-import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog-error/dialog.component';
 import { DialogSuccessComponent } from '../dialog-success/dialog-success.component';
-import { Router } from '@angular/router';
+import { LoginService } from '../../services/auth/auth.service';
+import { OrderService } from '../../services/features/order.service';
+
 @Component({
   selector: 'cliente-checkout',
   standalone: true,
@@ -18,7 +18,10 @@ import { Router } from '@angular/router';
   styleUrl: './checkout.component.css'
 })
 export class CheckoutComponent implements OnInit {
+
   userId: number | undefined;
+   //evento al hacer clic para "Cancelar compra"
+   @Output() cancelarCompraEvent = new EventEmitter();
 
 
   checkoutForm = this.formBuilder.group({
@@ -36,7 +39,6 @@ export class CheckoutComponent implements OnInit {
     expYear: ['', [Validators.required, Validators.min(new Date().getFullYear())]],
     cvv: ['', [Validators.required, Validators.pattern('^[0-9]{3,4}$')]] // CVV de 3 o 4 dígitos
   });
-  // router: any;
 
 constructor(private formBuilder: FormBuilder,
   private cartService: CartService,
@@ -52,22 +54,21 @@ constructor(private formBuilder: FormBuilder,
       next: (userData) => {
         if (userData) {
           this.userId = userData.id;
-          // Asumiendo que tu interfaz Usuario tiene una propiedad id
-          // Aquí puedes acceder a otros datos del usuario si es necesario
+
         } else {
           console.log('User data is null');
         }
       }
     });
-     // Llamada al método para autorellenar el formulario con datos del localStorage
+     //  autorellenop el formulario con datos del localStorage
   this.autorellenarFormulario();
 }
 
 autorellenarFormulario(): void {
-  // Obtener la información del cliente de localStorage
+  // Obtengo la informacion del usario logueado
   const clienteInfo = JSON.parse(localStorage.getItem('user')!);
 
-  // Si existe información del cliente, establecer los valores del formulario
+  // Si existe información del usuario, le establezco los valores del formulario
   if (clienteInfo) {
     this.checkoutForm.patchValue({
       fullName: `${clienteInfo.nombre} ${clienteInfo.apellido}` || '',
@@ -76,7 +77,7 @@ autorellenarFormulario(): void {
       city: clienteInfo.localidad?.nombre || '',
       state: clienteInfo.localidad?.provincia?.nombre || '',
       zip: clienteInfo.localidad?.codigoPostal || '',
-      // No autorellenar información sensible de la tarjeta
+      // No se autorellena la tarjeta de crédito  "por razones de seguridad"""
     });
   }
 
@@ -139,7 +140,7 @@ autorellenarFormulario(): void {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('El modal se ha cerrado'); // despues de que se cierre el modal....
+      console.log('El modal se ha cerrado'); // despues de que se cierre el modal algo se puede hacer....
     });
   }
 
@@ -151,21 +152,19 @@ autorellenarFormulario(): void {
 
     setTimeout(() => {
       dialogRef.close();
-      this.checkoutForm.reset(); // Resetea el formulario
-      this.cartService.clearCart(); // Limpia el carrito
-      this.router.navigate(['/app-user/mis-pedidos']); // Redirige a la página de confirmación
+      this.checkoutForm.reset(); 
+      this.cartService.clearCart(); 
+      this.router.navigate(['/app-user/mis-pedidos']); 
     }, 5000);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('El modal se ha cerrado');
-      // Aquí puedes poner cualquier lógica adicional que necesites después de cerrar el modal
+     
     });
   }
 
-  @Output() cancelarCompraEvent = new EventEmitter();
-
   cancelarCompra(): void {
-    this.cancelarCompraEvent.emit(); // Emitir el evento al hacer clic en "Cancelar compra"
+    this.cancelarCompraEvent.emit(); 
   }
 
 
