@@ -1,5 +1,6 @@
 .navbar {
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+    background: -webkit-linear-gradient(#e66465, #9198e5); /* Degradado de dos colores */
   }
   .navbar .navbar-brand img {
     max-width: 100px;
@@ -7,6 +8,11 @@
   .navbar .navbar-nav .nav-link {
     color: #000;
   }
+  .navbar .navbar-nav .nav-link.active {
+    color: hwb(121.95deg 1.98% 4.31%);
+    
+  }
+
   @media screen and (min-width: 1024px) {
     .navbar {
       letter-spacing: 0.1em;

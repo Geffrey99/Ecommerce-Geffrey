@@ -10,10 +10,13 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/admin/clientes">Clientes</a>
+            <a class="nav-link" aria-current="page" routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Online Geffrey</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/admin/pedidos">Pedidos</a>
+            <a class="nav-link"  aria-current="page" routerLink="/admin/clientes" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Clientes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin/pedidos" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Pedidos</a>
           </li>
           <!-- <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -42,16 +45,16 @@
             </ul>
           </li> -->
           <li class="nav-item">
-            <a class="nav-link" routerLink="/admin/productos">Crud-Productos</a>
+            <a class="nav-link" routerLink="/admin/productos" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Crud-Productos</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Productos 
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Moviles</a></li>
-              <li><a class="dropdown-item" href="#">Ordenadores</a></li>
-              <li><a class="dropdown-item" href="#">Accesorios</a></li>
+              <li><a class="dropdown-item"  routerLink="/admin/listaProductos">Lista </a></li>
+              <li><a class="dropdown-item" href="#">Listar Productos</a></li>
+              <li><a class="dropdown-item" href="#">Modificar Productos</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>

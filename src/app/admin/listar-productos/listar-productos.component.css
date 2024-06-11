@@ -1,0 +1,4 @@
+button.mat-button {
+    margin: 0 5px; /* Espaciado entre botones */
+    background-color: aqua;
+  }

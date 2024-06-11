@@ -5,12 +5,13 @@ import { CrudProductosComponent } from './crud-productos/crud-productos.componen
 import { GestionarPedidosComponent } from './gestionar-pedidos/gestionar-pedidos.component';
 import { DetailComponent } from '../client/details-products/detail.component'; // 
 import { ProductComponent } from '../client/product/product.component';
-
+import { ListarProductosComponent } from './listar-productos/listar-productos.component';
 
 export const adminRoutes: Routes = [
   { path: 'clientes', component: CrudClientesComponent },
   { path: 'productos', component: CrudProductosComponent },
   { path: 'pedidos', component: GestionarPedidosComponent },
   { path: 'products', component: ProductComponent },
+  { path: 'listaProductos', component: ListarProductosComponent },
   { path: 'admin', redirectTo: 'admin', pathMatch: 'full'}
 ];
