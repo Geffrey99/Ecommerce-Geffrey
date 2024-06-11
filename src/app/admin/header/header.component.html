@@ -80,7 +80,7 @@
     </div>
   </nav>
   
-  <style>
+  <!-- <style>
     .carousel-item img {
       height:  250px;
       object-fit: cover;
@@ -106,7 +106,7 @@
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Siguiente</span>
     </button>
-  </div>
+  </div> -->
     
 <!-- <app-product></app-product> -->
 
@@ -118,35 +118,30 @@
 
 
 
-
-  <div>
-   <!-----DATOS DEL USUARIO--> 
-   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasRightLabel">Mi cuenta</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header bg-dark text-white">
+    <h5 class="offcanvas-title" id="offcanvasRightLabel">Mi cuenta</h5>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body bg-light">
+    <div *ngIf="!userLoginOn" class="text-center">
+      <p class="lead">Por favor inicia sesión para continuar</p>
+      <a class="btn btn-success" href="/iniciar-sesion">Iniciar sesión</a>
     </div>
-    <div class="offcanvas-body">
-      <div *ngIf="!userLoginOn">
-        <p>Por favor inicia sesión</p>
-        <a class="btn btn-primary" href="/iniciar-sesion">Iniciar sesión</a>
+    <div *ngIf="userLoginOn">
+      <h3 class="text-success fw-bold">Bienvenido, {{userData?.rol || 'Cliente'}} - {{userData?.id}}</h3>
+      <div class="user-info">
+        <p><strong>Nombre:</strong> {{ userData?.nombre }}</p>
+        <p><strong>Apellido:</strong> {{ userData?.apellido }}</p>
+        <p><strong>Email:</strong> {{ userData?.email }}</p> 
       </div>
-      <div *ngIf="userLoginOn">
-        <h3 class="text-success">Estas conectado {{userData?.rol}} - {{userData?.id}} </h3>
-        <p>Nombre: {{ userData?.nombre }}</p>
-        <p>Apellido: {{ userData?.apellido }}</p>
-        <p>Email: {{ userData?.email }}</p> 
-      </div>
-      <div *ngIf="userLoginOn">
-        <a class="btn btn-primary" href=" ">Cerrar sesión</a>
-      </div>
-      <div *ngIf="userLoginOn">
-        <a class="btn btn-primary" href=" ">Ver pedidos</a>
-      </div>
-      <div *ngIf="userLoginOn">
-        <a class="btn btn-primary" href=" ">Eliminar Cuenta</a>
+      <div class="d-grid gap-2">
+        <a class="btn btn-outline-danger" href="#">Cerrar sesión</a>
+        <!-- <a class="btn btn-outline-primary" routerLink="/app-user/mis-pedidos">Ver pedidos</a> -->
+        <a class="btn btn-outline-secondary" href="#">Mis datos</a>
       </div>
     </div>
   </div>
-  
+</div>
 
+  

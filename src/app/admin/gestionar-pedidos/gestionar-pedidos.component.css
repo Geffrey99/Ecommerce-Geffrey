@@ -1,0 +1,53 @@
+Estilos CSS
+.container {
+    max-width: 960px;
+    margin: auto;
+  }
+  
+  .nav-tabs .nav-link {
+    color: #495057;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-bottom-color: transparent;
+  }
+  
+  .nav-tabs .nav-link.active {
+    /* color: #495057;
+    background-color: #f8f9fa; */
+    color: #ff0000;
+    background-color: #ffffff;
+    border-color: #ff4d00 #ff8d00 #fff;
+    FONT-FAMILY: fantasy;
+    cursor: pointer;
+    /* border-color: #dee2e6 #dee2e6 #fff; */
+  }
+  
+  .table-hover tbody tr:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .table thead {
+    background-color: #343a40;
+    color: #fff;
+  }
+  
+  .text-warning {
+    color: #ffc107 !important;
+  }
+  
+  .btn-outline-primary {
+    color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .btn-outline-primary:hover {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+
+  .nav-link.active {
+    color: #fff;
+    background-color: #007bff; /* Color azul predeterminado de Bootstrap */
+  }
+  /* cursor: no-drop; */

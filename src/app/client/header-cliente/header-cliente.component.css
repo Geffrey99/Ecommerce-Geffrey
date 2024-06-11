@@ -1,5 +1,6 @@
 .navbar {
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+    background: -webkit-linear-gradient(#e66465, #9198e5); /* Degradado de dos colores */
   }
   .navbar .navbar-brand img {
     max-width: 100px;
@@ -7,6 +8,19 @@
   .navbar .navbar-nav .nav-link {
     color: #000;
   }
+  .navbar .navbar-nav .nav-link.active {
+    color: hwb(121.95deg 1.98% 4.31%);
+    
+  }
+
+  .degradado-texto {
+    font-size: 1.5em; /* Tamaño del texto */
+    background: -webkit-linear-gradient(#e66465, #9198e5); /* Degradado de dos colores */
+    -webkit-text-fill-color: transparent;
+    display: inline-block; /* Necesario para que el degradado funcione correctamente */
+  }
+  
+  
   @media screen and (min-width: 1024px) {
     .navbar {
       letter-spacing: 0.1em;
@@ -64,9 +78,11 @@
     /* Aquí puedes agregar más estilos para cuando el ratón esté encima, como un cambio de color o un efecto */
   }
 
-  .active {
-    cursor: pointer;
-    color: #0275d8; /* Cambia el color al pasar por encima */
-    transform: scale(1.1); /* Aumenta ligeramente el tamaño para dar un efecto de resalte */
-    transition: all 0.3s ease; 
-  }
+
+    .container-xl.nav-link {
+      color: #495057;
+      background-color: #fff;
+      border: 1px solid #dee2e6;
+      border-bottom-color: transparent;
+    }
+  

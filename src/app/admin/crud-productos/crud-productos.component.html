@@ -1,5 +1,59 @@
-<p>crud-productos works!</p>
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+  <div class="container my-5">
+    <div class="row justify-content-md-center">
+      <div class="col-md-6">
+        <h2 class="mb-4">Registro de Producto</h2>
+        <div class="mb-3">
+          <label for="name" class="form-label">Nombre:</label>
+          <input type="text" class="form-control" id="name" formControlName="name" placeholder="Iphone 18 zz..." required>
+          <div class="invalid-feedback">
+            Por favor, introduce el nombre del producto.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="price" class="form-label">Precio:</label>
+          <input type="number" class="form-control" id="price" formControlName="price" placeholder="1.111,11..." min="1" step="0.01" required>
+          <div class="invalid-feedback">
+            Por favor, introduce el precio del producto.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Descripción:</label>
+          <textarea class="form-control" id="description" formControlName="description" rows="3"  placeholder="El mejor movil del mercado y eso..." ></textarea>
+          <div class="invalid-feedback">
+            Por favor, introduce una descripción del producto.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="stock" class="form-label">Stock:</label>
+          <input type="number" class="form-control" id="stock" formControlName="stock" placeholder="+1" min="1" required>
+          <div class="invalid-feedback">
+            Por favor, introduce la cantidad de stock disponible.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="category" class="form-label">Categoría:</label>
+          <select class="form-select" id="category" formControlName="category" required>
+            <option value="1">Móviles</option>
+            <option value="2">Portátiles</option>
+            <option value="3">Accesorios</option>
+          </select>
+          <div class="invalid-feedback">
+            Por favor, selecciona una categoría.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="photo" class="form-label">Foto:</label>
+          <input type="file" class="form-control" id="photo" formControlName="photo" (change)="onFileSelected($event)">
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar Producto</button>
+      </div>
+    </div>
+  </div>
+</form>
 
+
+<!-- 
 <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
     <div>
       <label for="name">Nombre:</label>
@@ -26,11 +80,29 @@
       <input type="file" id="photo" formControlName="photo" (change)="onFileSelected($event)">
     </div>
     <button type="submit">Guardar Producto</button>
-  </form>
+  </form> -->
 
 
   <!------SUBIR IMAGENES DE ESE PRODUCTO -->
-<form (submit)="onSubmit()">
+<!-- <form (submit)="onSubmit()">
   <input type="file" (change)="onFileSelected($event)" accept="image/*">
   <button type="submit">Subir Imagen</button>
-</form>
+</form> -->
+
+<!-- Modal de éxito -->
+<!-- <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="successModalLabel">Éxito</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        Producto enviado perfectamente.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div> -->

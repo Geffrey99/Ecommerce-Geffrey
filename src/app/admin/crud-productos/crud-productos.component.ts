@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms'
 import { HttpClient } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
+
+
 @Component({
   selector: 'crud-productos',
   standalone: true,
@@ -13,6 +15,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 export class CrudProductosComponent {
 
   productForm: FormGroup;
+  selectedFile: File | null = null;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -26,47 +30,46 @@ export class CrudProductosComponent {
       photo: ['']
     });
   }
+
+
   onFileSelected(event: any) {
     const file = event.target.files[0];
     if (file) {
-      this.productForm.patchValue({
-        photo: file
-      });
+      // Simplemente guarda el archivo en la propiedad selectedFile
+      this.selectedFile = file;
     }
   }
-  onSubmit() {
-    if (this.productForm.valid) {
-      const formData = new FormData();
-      const name = this.productForm.get('name')?.value;
-      const price = this.productForm.get('price')?.value;
-      const description = this.productForm.get('description')?.value;
-      const stock = this.productForm.get('stock')?.value;
-      const category = this.productForm.get('category')?.value; // Agregar el campo de la categoría aquí
-      const photo = this.productForm.get('photo')?.value;
 
-      if (name) {
-        formData.append('name', name);
-      }
-      if (price) {
-        formData.append('price', price);
-      }
-      if (description) {
-        formData.append('description', description);
-      }
-      if (stock) {
-        formData.append('stock', stock);
-      }
-      if (category) {
-        formData.append('category', category); // Enviar el nombre de la categoría directamente
-      }
-      if (photo) {
-        formData.append('photo', photo);
-      }
+
+
+
+  // onFileSelected(event: any) {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     this.productForm.patchValue({
+  //       photo: file
+  //     });
+  //   }
+  // }
+  onSubmit() {
+    if (this.productForm.valid && this.selectedFile) {
+      const formData = new FormData();
+      formData.append('name', this.productForm.get('name')?.value);
+      formData.append('price', this.productForm.get('price')?.value);
+      formData.append('description', this.productForm.get('description')?.value);
+      formData.append('stock', this.productForm.get('stock')?.value);
+      formData.append('category', this.productForm.get('category')?.value);
+      formData.append('photo', this.selectedFile); // Añade el archivo seleccionado directamente
 
       this.http.post<any>('http://localhost:8081/api/products/create', formData).subscribe(
         response => {
           console.log('Producto creado exitosamente:', response);
-          // Aquí puedes manejar la respuesta, por ejemplo, mostrar un mensaje de éxito
+          // const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+          // successModal.show();
+          // Resetea el formulario
+          this.productForm.reset();
+          // Resetea la variable del archivo seleccionado
+          this.selectedFile = null;
         },
         error => {
           console.error('Error al crear el producto:', error);

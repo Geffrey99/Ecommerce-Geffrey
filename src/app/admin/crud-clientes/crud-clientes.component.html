@@ -1,0 +1,61 @@
+<!-- Angular Material Table para mostrar usuarios -->
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- Columna de Foto -->
+    <ng-container matColumnDef="foto">
+      <mat-header-cell *matHeaderCellDef> Foto </mat-header-cell>
+      <mat-cell *matCellDef="let usuario">
+        <img src="assets/img/ICON.png" alt="Foto de perfil" class="foto-perfil">
+      </mat-cell>
+    </ng-container>
+  
+    <!-- Columnas de Nombre y Apellido -->
+    <ng-container matColumnDef="nombre">
+      <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+      <mat-cell *matCellDef="let usuario"> {{ usuario.nombre }} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="apellido">
+      <mat-header-cell *matHeaderCellDef> Apellido </mat-header-cell>
+      <mat-cell *matCellDef="let usuario"> {{ usuario.apellido }} </mat-cell>
+    </ng-container>
+  
+    <!-- Columna de Acciones -->
+    <ng-container matColumnDef="acciones">
+      <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+      <mat-cell *matCellDef="let usuario">
+        <button mat-button color="primary" (click)="verOrdenesDeUsuario(usuario.id)">Ver órdenes</button>
+      </mat-cell>
+    </ng-container>
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  
+  <!-- Paginación -->
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  
+  <!-- Detalles de las órdenes seleccionadas -->
+  <div *ngIf="ordenesSeleccionadas.length > 0" class="ordenes-detalle">
+    <h3>Órdenes del Usuario Seleccionado:</h3>
+    <mat-list>
+      <mat-list-item *ngFor="let orden of ordenesSeleccionadas">
+        ID de Orden: {{ orden.id }}
+        <button mat-button color="accent" (click)="showOrderDetails(orden.id)">Detalles</button>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  
+  <!-- Detalles de la orden seleccionada -->
+  <div *ngIf="selectedOrderDetails" class="orden-detalle">
+    <h3>Detalles de la Orden Seleccionada:</h3>
+    <mat-list>
+      <mat-list-item *ngFor="let detalle of selectedOrderDetails">
+        Producto: {{ detalle.productName || 'No hay detalles'}}
+        Cantidad: {{ detalle.cantidad || 'Nada' }}
+        Precio: {{ detalle.precio | currency:'EUR' }}
+        Subtotal: {{ (detalle.cantidad * detalle.precio) | currency:'EUR' }}
+      </mat-list-item>
+    </mat-list>
+  </div>
+  

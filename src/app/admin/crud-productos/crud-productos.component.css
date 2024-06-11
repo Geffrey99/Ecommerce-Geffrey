@@ -1,0 +1,38 @@
+/* Estilos CSS */
+.container {
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    color: #0056b3;
+    text-align: center;
+  }
+  
+  .form-label {
+    font-weight: bold;
+    color: #495057;
+  }
+  
+  .btn-primary {
+    background-color: #0056b3;
+    border: none;
+  }
+  
+  .btn-primary:hover {
+    background-color: #004494;
+  }
+  
+  .invalid-feedback {
+    display: none;
+  }
+  
+  .needs-validation .form-control:invalid {
+    border-color: #dc3545;
+  }
+  
+  .needs-validation .form-control:invalid ~ .invalid-feedback {
+    display: block;
+  }
+  

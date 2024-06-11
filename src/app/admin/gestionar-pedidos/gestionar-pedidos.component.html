@@ -1,37 +1,95 @@
-<p>gestionar-pedidos works!</p>
-
-<div class="container">
-    <div class="container">
-        <div class="btn-group">
-          <button class="btn btn-info" (click)="filterOrders('PENDIENTE')">Pendientes</button>
-          <button class="btn btn-success" (click)="filterOrders('Enviado')">Enviados</button>
-          <button class="btn btn-danger" (click)="filterOrders('Cancelado')">Cancelados</button>
-        </div>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Fecha</th>
-        <th>Estado</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let order of filteredOrders">
-        <td>{{ order.id }}</td>
-        <td>{{ order.fechaCompra | date }}</td>
-        <td>{{ order.estado }}</td>
-        <td>
-            <select #statusSelect class="form-select" (change)="updateSelectedStatus(order.id, statusSelect.value)">
-                <option [value]="order.estado" selected>{{ order.estado }}</option>
-                <option value="Enviado">Enviado</option>
-                <option value="Cancelado">Cancelado</option>
+<!-- Contenedor principal -->
+<div class="container my-5">
+  <!-- Pestañas de navegación -->
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" [class.active]="estadoActivo === 'Todos'"   (click)="cambiarEstadoActivo('Todos')">Todos</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="estadoActivo === 'PENDIENTE'"   (click)="cambiarEstadoActivo('PENDIENTE')">Pendientes</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="estadoActivo === 'Recibido'"   (click)="cambiarEstadoActivo('Recibido')">Recibidos</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="estadoActivo === 'Cancelado'"  (click)="cambiarEstadoActivo('Cancelado')">Cancelados</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="estadoActivo === 'Enviado'"  (click)="cambiarEstadoActivo('Enviado')">Enviados</a>
+    </li>
+  </ul>
+  <div class="row mt-3">
+      <!-- Columna de órdenes de compra -->
+      <div class="col-md-6">
+  <!-- Tabla de órdenes -->
+  <div class="table-responsive">
+    <table class="table table-hover mt-4">
+      <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>Fecha</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of ordersFiltrados | paginate:{itemsPerPage:10, currentPage:p}">
+          <td>{{ order.id }}</td>
+          <td>{{ order.fechaCompra | date }}</td>
+          <td [ngClass]="{'PENDIENTE': order.estado === 'PENDIENTE'}">
+            <ng-container *ngIf="order.estado === 'PENDIENTE'; else notSent">
+              <select #statusSelect (change)="changeOrderStatus(order.id, statusSelect.value)">
+                <option value="PENDIENTE" selected>Pendiente</option>
+                <option class="text-success" value="Enviado">ENVIAR</option>
+                <option class="text-danger" value="Cancelado">CANCELAR</option>
               </select>
-            </td>
-            <td>
-              <button class="btn btn-primary" (click)="changeOrderStatus(order.id)">Enviar</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+            </ng-container>
+            <ng-template #notSent>{{ order.estado }}</ng-template>
+          </td>
+          <td>
+            <button class="btn btn-primary" (click)="showOrderDetails(order.id)">Ver detalles</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+
+
+
+      <!-- Columna de detalles de la orden -->
+      <div class="col-md-6">
+        <div *ngIf="selectedOrderDetails; else verAnimacion">
+          <button class="btn btn-secondary" (click)="closeOrderDetails()">Cerrar</button>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let detail of selectedOrderDetails">
+                <td>{{ detail.productName || 'No hay detalles'}}</td>
+                <td>{{ detail.cantidad || 'Nada' }}</td>
+                <td>{{ detail.precio | currency:'EUR' }}</td>
+                <td>{{ (detail.cantidad * detail.precio) | currency:'EUR' }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- <button class="btn btn-secondary" (click)="closeOrderDetails()">Cerrar</button> -->
+        </div>
+        <ng-template #verAnimacion>
+          <div class="text-center">
+            <img src="assets/spinner.svg" alt="Cargando..." width="170px"/>
+          </div>
+          <hr>
+          <h3 class="text-center" > OnlineGeffrey lo mas fiable </h3>
+          </ng-template>
+      </div>
     </div>
+  </div>
+  
