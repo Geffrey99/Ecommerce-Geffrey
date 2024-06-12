@@ -8,6 +8,7 @@ import { HeaderComponent } from "../../shared/header/header.component";
 import { PhotoProductService } from '../../services/PhotoProduct.service';
 import { Product } from '../../interface/Product';
 import { ProductService } from '../../services/features/product.service';
+import { CartItem } from '../../interface/cart';
 
 @Component({
     selector: 'app-detail',
@@ -19,7 +20,7 @@ import { ProductService } from '../../services/features/product.service';
 })
 
 export class DetailComponent implements OnInit {
-  productId!: number;
+  productId = 0;
   product?: Product;
   products: Product[] = [];
   private imageBaseUrl = 'http://localhost:8081/api/product-images/';
@@ -50,6 +51,8 @@ export class DetailComponent implements OnInit {
         product.photoUrl = product.photoUrl;  // Este campo ya debería contener el nombre de archivo
         return product;
       });
+
+      
     });
 
     const routeParams = this.route.snapshot.paramMap;
@@ -60,22 +63,18 @@ export class DetailComponent implements OnInit {
   }
   
   addToCart(product?: Product): void {
-    if (product && product.stock > 0) {
+    if (!product || product.id == null) {
+      window.alert('Error: Producto no disponible.');
+      return;
+    }
+    // Comprueba si hay stock disponible antes de añadir al carrito
+    if (product.stock > 0) {
       this.cartService.addToCart(product);
-      // Actualizar el stock en el cliente
-      product.stock -= 1;
       window.alert('Ok, producto añadido al carrito');
-      // Si el stock llega a 0, deshabilitar el botón de añadir al carrito
-      if (product.stock === 0) {
-        window.alert('No hay más stock disponible para este producto.');
-        // Aquí podrías cambiar el estado de un botón o mostrar un mensaje en la interfaz
-      }
     } else {
-      window.alert('No se puede añadir el producto al carrito porque no hay stock disponible.');
+      window.alert('Error: No hay stock disponible.');
     }
   }
-  
-  
 
   loadProduct(): void {
     this.productService.getProductById(this.productId)

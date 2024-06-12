@@ -13,14 +13,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngIf="cart.length === 0">
+          <tr *ngIf="cartItems.length === 0">
           <td colspan="4">Tu carrito está vacío</td>
           </tr>
-          <tr *ngFor="let product of cart">
-            <td>{{ product.name }}</td>
-            <td>{{ product.category?.name  }}</td>
-            <td>{{ product.price | currency }}</td>
-            <td><button class="btn btn-danger btn-sm" (click)="removeProduct(product)" [disabled]="mostrarCheckout">X</button></td>
+          <tr *ngFor="let item of cartItems; trackBy: trackByProduct">
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.product.category?.name  }}</td>
+            <td>{{ item.product.price | currency }}</td>
+            <td>
+              <button class="btn btn-secondary btn-sm" (click)="decreaseProductQuantity(item.product.id)" [disabled]="mostrarCheckout || item.quantity <= 1">-</button>
+              <span>{{ item.quantity }}</span>
+              <button class="btn btn-danger btn-sm" (click)="removeProduct(item.product.id)" [disabled]="mostrarCheckout">X</button>
+            </td>
           </tr>
         <tr>
           <td colspan="2" class="text-right">
