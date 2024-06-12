@@ -6,6 +6,7 @@ import { GestionarPedidosComponent } from './gestionar-pedidos/gestionar-pedidos
 import { DetailComponent } from '../client/details-products/detail.component'; // 
 import { ProductComponent } from '../client/product/product.component';
 import { ListarProductosComponent } from './listar-productos/listar-productos.component';
+import { EditarProductosComponent } from './editar-productos/editar-productos.component';
 
 export const adminRoutes: Routes = [
   { path: 'clientes', component: CrudClientesComponent },
@@ -13,5 +14,7 @@ export const adminRoutes: Routes = [
   { path: 'pedidos', component: GestionarPedidosComponent },
   { path: 'products', component: ProductComponent },
   { path: 'listaProductos', component: ListarProductosComponent },
+  {path: 'editar-producto/:id', component: EditarProductosComponent},
   { path: 'admin', redirectTo: 'admin', pathMatch: 'full'}
+
 ];

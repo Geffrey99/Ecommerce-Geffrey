@@ -60,13 +60,22 @@ export class DetailComponent implements OnInit {
   }
   
   addToCart(product?: Product): void {
-    if (product) {
+    if (product && product.stock > 0) {
       this.cartService.addToCart(product);
+      // Actualizar el stock en el cliente
+      product.stock -= 1;
       window.alert('Ok, producto añadido al carrito');
+      // Si el stock llega a 0, deshabilitar el botón de añadir al carrito
+      if (product.stock === 0) {
+        window.alert('No hay más stock disponible para este producto.');
+        // Aquí podrías cambiar el estado de un botón o mostrar un mensaje en la interfaz
+      }
     } else {
-      window.alert('Error: Producto no disponible okok');
+      window.alert('No se puede añadir el producto al carrito porque no hay stock disponible.');
     }
   }
+  
+  
 
   loadProduct(): void {
     this.productService.getProductById(this.productId)

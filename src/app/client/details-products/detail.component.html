@@ -14,11 +14,14 @@
                 </div>
                 <p class="lead">{{product?.description}}</p>
                 <div class="d-flex">
-                    <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                    <button class="btn btn-outline-dark flex-shrink-0" type="button"   (click)="addToCart(product)">
+                    <!-- <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" /> -->
+                    <span>Stock : {{product?.stock }}</span>
+                    <button class="btn btn-outline-dark flex-shrink-0" type="button" [disabled]="product?.stock === 0" (click)="addToCart(product)">
                         <i class="bi-cart-fill me-1"></i>
-                     
-                    </button>
+                        Añadir al carrito
+                      </button>
+                      <span *ngIf="product?.stock === 0">No hay más stock disponible.</span>
+                        <i class="bi-cart-fill me-1"></i>
                 </div>
             </div>
         </div>
