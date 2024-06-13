@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { Router }  from '@angular/router';
 
 import { ProductComponent } from '../../client/product/product.component';
 import { LoginService } from '../../services/auth/auth.service';
@@ -24,6 +25,7 @@ export class HeaderClienteComponent  implements OnInit{
     private loginService: LoginService,
     private changeDetectorRef: ChangeDetectorRef,
     private categoryService: CategoryService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -56,6 +58,13 @@ export class HeaderClienteComponent  implements OnInit{
     // Aquí cambiamos el EventEmitter por el método selectCategory del servicio
     this.categoryService.selectCategory(category);
   }
+
+logout(): void {
+    this.loginService.logout();
+    this.router.navigate(['']);
+  }
+
+
 }
   
   

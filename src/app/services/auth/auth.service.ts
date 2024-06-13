@@ -1,8 +1,11 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { LoginRequest } from '../../interface/loginRequest';
+import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
+
 import { Observable, throwError, catchError, BehaviorSubject, tap } from 'rxjs';
 import { usuario } from '../../interface/user';
+import { LoginRequest } from '../../interface/loginRequest';
+import { isPlatformBrowser } from '@angular/common';
+import { CartService } from '../features/cart.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,26 +17,16 @@ export class LoginService {
   private authToken: string | null = null;
 
 
-  // constructor(private http: HttpClient) {
-  //   if (typeof window !== 'undefined') {
-  //   const user = localStorage.getItem('user');
-  //   const userRole = localStorage.getItem('userRole');
-  //   const isUserLoggedIn = localStorage.getItem('isUserLoggedIn');
-  //   if (user && userRole && isUserLoggedIn) {
-  //     this.setCurrentUser(JSON.parse(user));
-  //   }
-  // }
-  // }
-
-  constructor(private http: HttpClient) {
+  constructor( private http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object, private cartSevice: CartService) {
     this.loadUserFromStorage();
   }
-
   private loadUserFromStorage(): void {
-    const user = localStorage.getItem('user');
-    const token = localStorage.getItem('token');
-    if (user && token) {
-      this.setCurrentUser(JSON.parse(user), token);
+    if (isPlatformBrowser(this.platformId)) {
+      const user = localStorage.getItem('user');
+      const token = localStorage.getItem('token');
+      if (user && token) {
+        this.setCurrentUser(JSON.parse(user), token);
+      }
     }
   }
 
@@ -41,6 +34,7 @@ export class LoginService {
     return this.http.post<any>('http://localhost:8081/login', credentials).pipe(
       tap((response) => {
         this.setCurrentUser(response.usuario, response.token);
+        this.cartSevice.setCurrentUser(response.usuario);
       }),
       catchError(this.handleError)
     );
@@ -50,10 +44,11 @@ export class LoginService {
     this.currentUserData.next(userData);
     this.currentUserLoginOn.next(true);
     this.authToken = token;
-    localStorage.setItem('user', JSON.stringify(userData));
-    localStorage.setItem('token', token);
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('user', JSON.stringify(userData));
+      localStorage.setItem('token', token);
+    }
   }
-
   logout(): void {
     this.currentUserLoginOn.next(false);
     this.currentUserData.next(null);
@@ -61,32 +56,6 @@ export class LoginService {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
   }
-
-
-  // login(credentials: LoginRequest): Observable<any> { // Cambia el tipo de retorno a 'any' para incluir el rol
-  //   return this.http.post<any>('http://localhost:8081/login', credentials).pipe(
-  //     tap((response) => {
-  //       const userData = response.usuario;
-  //       const userRole = userData.rol; 
-  //       // delete userData.contraseña; // Eliminar la contraseña de userData
-  //       this.setCurrentUser(userData);
-  //       localStorage.setItem('user', JSON.stringify(userData));
-  //       localStorage.setItem('userRole', userRole); 
-  //       localStorage.setItem('isUserLoggedIn', 'true');
-  //     }),
-  //     catchError(this.handleError)
-  //   );
-  // }
-
-  // setCurrentUser(userData: usuario): void {
-  //   this.currentUserData.next(userData);
-  //   this.currentUserLoginOn.next(true);
-  // }
-
-  // logout(): void {
-  //   this.currentUserLoginOn.next(false);
-  //   this.currentUserData.next(null);
-  // }
 
 
   private getAuthHeaders(): HttpHeaders {
@@ -141,3 +110,39 @@ registerContacto(usuario: usuario): Observable<any> {
 
 
 }
+  // constructor(private http: HttpClient) {
+  //   if (typeof window !== 'undefined') {
+  //   const user = localStorage.getItem('user');
+  //   const userRole = localStorage.getItem('userRole');
+  //   const isUserLoggedIn = localStorage.getItem('isUserLoggedIn');
+  //   if (user && userRole && isUserLoggedIn) {
+  //     this.setCurrentUser(JSON.parse(user));
+  //   }
+  // }
+  // }
+
+
+  // login(credentials: LoginRequest): Observable<any> { // Cambia el tipo de retorno a 'any' para incluir el rol
+  //   return this.http.post<any>('http://localhost:8081/login', credentials).pipe(
+  //     tap((response) => {
+  //       const userData = response.usuario;
+  //       const userRole = userData.rol; 
+  //       // delete userData.contraseña; // Eliminar la contraseña de userData
+  //       this.setCurrentUser(userData);
+  //       localStorage.setItem('user', JSON.stringify(userData));
+  //       localStorage.setItem('userRole', userRole); 
+  //       localStorage.setItem('isUserLoggedIn', 'true');
+  //     }),
+  //     catchError(this.handleError)
+  //   );
+  // }
+
+  // setCurrentUser(userData: usuario): void {
+  //   this.currentUserData.next(userData);
+  //   this.currentUserLoginOn.next(true);
+  // }
+
+  // logout(): void {
+  //   this.currentUserLoginOn.next(false);
+  //   this.currentUserData.next(null);
+  // }

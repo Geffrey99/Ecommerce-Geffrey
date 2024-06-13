@@ -1,8 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Product } from '../../interface/Product';
+
+import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
 import { OrderDetail } from '../../interface/orderDetail';
 import { CartItem } from '../../interface/cart';
+import { Product } from '../../interface/Product';
+import {usuario} from '../../interface/user';
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +15,15 @@ export class CartService {
   private cartSubject = new BehaviorSubject<CartItem[]>(this.loadCart());
   cart$ = this.cartSubject.asObservable();
 
-  constructor() {}
+  private currentUser: usuario | null = null;
+
+  setCurrentUser(user: usuario | null): void {
+    this.currentUser = user;
+    this.cartSubject.next(this.loadCart()); // Carga el carrito asociado al usuario actual
+  }
+
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   addToCart(product?: Product): void {
     if (!product || typeof product.id === 'undefined') {
@@ -79,16 +90,6 @@ export class CartService {
     this.saveCart([]);
   }
 
-  private saveCart(cart: CartItem[]): void {
-    localStorage.setItem('cart', JSON.stringify(cart));
-    this.cartSubject.next(cart);
-  }
-
-  private loadCart(): CartItem[] {
-    const savedCart = localStorage.getItem('cart');
-    return savedCart ? JSON.parse(savedCart) : [];
-  }
-
   getOrderDetails(): OrderDetail[] {
     const cartItems = this.cartSubject.value;
     return cartItems.map(cartItem => {
@@ -99,5 +100,28 @@ export class CartService {
       };
     });
   }
+
+  private saveCart(cart: CartItem[]): void {
+    if (this.currentUser && this.currentUser.id) {
+      localStorage.setItem('cart_' + this.currentUser.id, JSON.stringify(cart));
+      this.cartSubject.next(cart);
+    }
+  }
+
+
+  private loadCart(): CartItem[] {
+    if (isPlatformBrowser(this.platformId)) {
+      // Aquí puedes acceder a localStorage porque estás en el navegador
+      const savedUser = localStorage.getItem('user');
+      if (savedUser) {
+        const user: usuario = JSON.parse(savedUser);
+        const savedCart = localStorage.getItem('cart_' + user.id);
+        return savedCart ? JSON.parse(savedCart) : [];
+      }
+    }
+    return [];
+  }
+
+
 }
 

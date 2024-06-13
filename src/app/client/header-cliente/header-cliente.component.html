@@ -100,7 +100,7 @@
         <p><strong>Email:</strong> {{ userData?.email }}</p> 
       </div>
       <div class="d-grid gap-2">
-        <a class="btn btn-outline-danger" href="#">Cerrar sesión</a>
+        <a class="btn btn-outline-danger" (click)="logout()">Cerrar sesión</a>
         <a class="btn btn-outline-primary" routerLink="/app-user/mis-pedidos">Ver pedidos</a>
         <a class="btn btn-outline-secondary" href="#">Mis datos</a>
       </div>
