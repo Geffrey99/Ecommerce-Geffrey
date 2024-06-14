@@ -3,33 +3,31 @@
 <!----------Cuerpo de la pagina detalles del producto a Comprar------------>
 <section class="py-2">
     <div class="container px-4 px-lg-5 my-5">
-        <div class="row gx-4 gx-lg-5 align-items-center">
-            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..." /></div>
-            <div class="col-md-6">
-                <div class="small mb-1">Categoria : {{product?.category?.name ?? 'Categoría no disponible'}}</div>
-                <h1 class="display-5 fw-bolder">{{ product?.name }}</h1>
-                <div class="fs-5 mb-5">
-                    <span class="text-decoration-line-through">10%</span>
-                    <span>€{{product?.price }}</span>
-                </div>
-                <p class="lead">{{product?.description}}</p>
-                <div class="d-flex">
-                    <!-- <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" /> -->
-                    <span>Stock : {{product?.stock }}</span>
-                    <button class="btn btn-outline-dark flex-shrink-0" type="button"
-                    [disabled]="!product || product.stock === 0"
-                    (click)="product && addToCart(product)">
+      <div class="row gx-4 gx-lg-5 align-items-center">
+        <div class="col-md-6">
+          <img class="card-img-top img-fluid" [src]="getFullImageUrl(product?.photoPath ?? '')" [alt]="product?.name" style="height: 200px; width: auto;"/>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-1 text-muted">Categoria: {{product?.category?.name ?? 'Categoría no disponible'}}</div>
+          <h1 class="display-5 fw-bolder">{{ product?.name }}</h1>
+          <div class="fs-5 mb-5">
+            <span class="fw-bold">€{{product?.price }}</span>
+          </div>
+          <p class="lead">{{product?.description}}</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="badge bg-secondary">Stock: {{product?.stock }}</span>
+            <button class="btn btn-dark" type="button"
+              [disabled]="!product || product.stock === 0"
+              (click)="product && addToCart(product)">
               Añadir al carrito
             </button>
-                      <span *ngIf="product?.stock === 0">No hay más stock disponible.</span>
-                        <i class="bi-cart-fill me-1"></i>
-                     
-
-                </div>
-            </div>
+          </div>
+          <span *ngIf="product?.stock === 0" class="text-danger">No hay más stock disponible.</span>
         </div>
+      </div>
     </div>
-</section>
+  </section>
+  
 
 <!-----SECCION DE MAS PRODUCTOS -->
 
@@ -43,13 +41,15 @@
                     <div class="card-body p-4">
                         <div class="text-center">
                             <h5 class="fw-bolder">{{ product.name }}</h5>
-                             <span *ngIf="product.price; else regularPrice">
-                                <span class="text-muted text-decoration-line-through">{{ product.price }} €</span>
-                                {{ product.price }} € 
-                            </span>
-                     <ng-template #regularPrice>
-                                {{ product.price }} €
-                            </ng-template>
+                            <span *ngIf="product.price; else regularPrice">
+                              <!-- Aumentamos el precio original en un 10% y lo mostramos tachado -->
+                              <span class="price-original">{{ (product.price * 1.1).toFixed(2) }} €</span>
+                              <!-- El precio actual se muestra en rojo y más grande -->
+                              <span class="price-current">{{ product.price }} €</span>
+                          </span>
+                          <ng-template #regularPrice>
+                              <span class="price-current">{{ product.price }} €</span>
+                          </ng-template>
                         </div> 
                     </div>
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">

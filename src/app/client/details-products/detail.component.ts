@@ -85,7 +85,7 @@ export class DetailComponent implements OnInit {
   }
 
   getFullImageUrl(photoUrl: string): string {
-    return `${this.imageBaseUrl}${photoUrl}`;
+    return photoUrl ? `${this.imageBaseUrl}${photoUrl}` : 'assets/okOk.svg';
   }
 
   loadSelectedProduct(productId: number): void {

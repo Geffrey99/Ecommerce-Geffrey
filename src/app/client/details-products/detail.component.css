@@ -27,3 +27,14 @@
 .card-footer {
     padding: 1rem;
 } 
+
+.product-item .price-original {
+    text-decoration: line-through;
+    color: #6c757d; /* Un color gris para el texto tachado */
+}
+
+.product-item .price-current {
+    font-size: 1.2em;
+    color: red; /* El precio actual en rojo para resaltar */
+    font-weight: bold;
+}

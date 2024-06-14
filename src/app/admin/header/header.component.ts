@@ -4,6 +4,7 @@ import { LoginService } from '../../services/auth/auth.service';
 import { CommonModule } from '@angular/common';
 import { ProductComponent } from '../../client/product/product.component';
 import { RouterModule } from '@angular/router';
+import { Router }  from '@angular/router';
 
 @Component({
   selector: 'admin-header',
@@ -18,7 +19,8 @@ export class HeaderAdminComponent implements OnInit{
   
   constructor(
     private loginService: LoginService,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -40,5 +42,10 @@ export class HeaderAdminComponent implements OnInit{
         }
       }
     });
+  }
+
+  logout(): void {
+    this.loginService.logout();
+    this.router.navigate(['/iniciar-sesion']);
   }
 }

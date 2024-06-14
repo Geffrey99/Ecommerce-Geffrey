@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'crud-productos',
   standalone: true,
-  imports: [FormsModule,ReactiveFormsModule],
+  imports: [FormsModule,ReactiveFormsModule, CommonModule],
   templateUrl: './crud-productos.component.html',
   styleUrl: './crud-productos.component.css'
 })
@@ -16,7 +16,7 @@ export class CrudProductosComponent {
 
   productForm: FormGroup;
   selectedFile: File | null = null;
-
+  imagenPrevisualizacion?: string | ArrayBuffer | null;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -37,8 +37,17 @@ export class CrudProductosComponent {
     if (file) {
       // Simplemente guarda el archivo en la propiedad selectedFile
       this.selectedFile = file;
+      const reader = new FileReader();
+      reader.onload = e => {
+        // Asegúrate de que el resultado no sea 'null' antes de asignarlo
+        if (reader.result) {
+          this.imagenPrevisualizacion = reader.result;
+        }
+      };
+      reader.readAsDataURL(file);
     }
   }
+  
 
 
 
@@ -70,6 +79,7 @@ export class CrudProductosComponent {
           this.productForm.reset();
           // Resetea la variable del archivo seleccionado
           this.selectedFile = null;
+          this.imagenPrevisualizacion = null;
         },
         error => {
           console.error('Error al crear el producto:', error);

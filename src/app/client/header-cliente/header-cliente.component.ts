@@ -61,7 +61,7 @@ export class HeaderClienteComponent  implements OnInit{
 
 logout(): void {
     this.loginService.logout();
-    this.router.navigate(['']);
+    this.router.navigate(['/iniciar-sesion']);
   }
 
 

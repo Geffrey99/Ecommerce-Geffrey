@@ -55,6 +55,7 @@ export class LoginService {
     this.authToken = null;
     localStorage.removeItem('user');
     localStorage.removeItem('token');
+    
   }
 
 

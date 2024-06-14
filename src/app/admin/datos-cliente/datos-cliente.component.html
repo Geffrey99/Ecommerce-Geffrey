@@ -1,0 +1,81 @@
+   <div class="container mt-4">
+    <div class="row">
+      <!-- Columna de Información del Usuario -->
+      <div class="col-md-4 mb-3 d-flex">
+        <div class="card flex-fill d-flex flex-column">
+          <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Perfil del Usuario</h4>
+          </div>
+          <div class="card-body overflow-auto">
+            <img src="assets/img/ICON.png" alt="Foto de perfil" class="foto-perfil" width="50px">
+            <p><strong>Cliente con ID:</strong> {{ usuario?.id || 'Sin información' }}</p>
+            <p><strong>Nombre:</strong> {{ usuario?.nombre || 'Sin información' }}</p>
+            <p><strong>Apellido:</strong> {{ usuario?.apellido || 'Sin información' }}</p>
+            <p><strong>Email:</strong> {{ usuario?.email || 'Sin información' }}</p>
+            <p *ngIf="usuario?.direccionEnvio; else noInfo"><strong>Dirección de Envío:</strong> {{ usuario?.direccionEnvio }}</p>
+            <p *ngIf="usuario?.metodoPago; else noInfo"><strong>Método de Pago:</strong> {{ usuario?.metodoPago }}</p>
+            <p><strong>Localidad:</strong> {{ usuario?.localidad?.nombre || 'Sin información' }}</p>
+            <p><strong>Provincia:</strong> {{ usuario?.localidad?.provincia?.nombre || 'Sin información' }}</p>
+            <p><strong>Rol:</strong> {{ usuario?.rol || 'Sin información' }}</p>
+          </div>
+          <div class="card-footer mt-auto">
+            <button mat-raised-button color="primary" (click)="verComprasDeUsuario(usuario.id)">Ver órdenes</button>
+          </div>
+        </div>
+      </div>
+  
+      <ng-template #noInfo>
+        <p class="text-muted">Sin información</p>
+      </ng-template>
+  
+      <!-- Columna de Órdenes -->
+      <div class="col-md-4 mb-3 d-flex">
+        <div class="card flex-fill">
+          <div class="card-header bg-success text-white">
+            <h4 class="mb-0">Órdenes del Usuario</h4>
+          </div>
+          <div class="card-body overflow-auto">
+            <div *ngIf="ordenesSeleccionadas.length > 0; else noOrders">
+              <mat-list>
+                <mat-list-item *ngFor="let orden of ordenesSeleccionadas">
+                  <div class="d-flex justify-content-between">
+                    <span>ID de Orden: {{ orden.id }}</span>
+                    <button mat-button color="accent" (click)="showOrderDetails(orden.id)">Detalles</button>
+                  </div>
+                </mat-list-item>
+              </mat-list>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <ng-template #noOrders>
+        <div class="alert alert-info text-center" role="alert">
+            <img src="assets/spinner.svg" alt="Cargando..." width="170px"/>
+        </div>
+      </ng-template>
+  
+      <!-- Columna de Detalles de las Órdenes -->
+      <div class="col-md-4 mb-3 d-flex">
+        <div class="card flex-fill">
+          <div class="card-header bg-info text-white">
+            <h4 class="mb-0">Detalles de la Orden</h4>
+          </div>
+          <div class="card-body overflow-auto">
+            <div *ngIf="ordenesSeleccionadas.length > 0; else noOrders">
+            <mat-list>
+              <mat-list-item *ngFor="let detalle of selectedOrderDetails">
+                <div class="d-flex justify-content-between">
+                  <span>Producto: {{ detalle.productName || 'No hay detalles' }}</span>
+                  <span>Cantidad: {{ detalle.cantidad || 'Nada' }}</span>
+                  <span>Precio: {{ detalle.precio | currency:'EUR' }}</span>
+                  <span>Subtotal: {{ (detalle.cantidad * detalle.precio) | currency:'EUR' }}</span>
+                </div>
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

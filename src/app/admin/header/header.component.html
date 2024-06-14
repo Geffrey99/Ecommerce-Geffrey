@@ -17,37 +17,14 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="/admin/pedidos" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Pedidos</a>
+          </li>  
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin/listaProductos" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Productos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin/productos" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Crear-Productos</a>
           </li>
           <!-- <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Portátiles
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Smartphones
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li> -->
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/admin/productos" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Crud-Productos</a>
-          </li>
-          <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Productos 
             </a>
@@ -61,7 +38,7 @@
               <li><a class="dropdown-item" href="#">Todos</a></li>
               <li><a class="dropdown-item" href="#">Otros...</a></li>
             </ul>
-          </li> 
+          </li>  -->
         </ul>
         <div class="search-and-icons">
           <form class="d-flex mb-2 me-2" role="search">
@@ -139,7 +116,7 @@
         <p><strong>Email:</strong> {{ userData?.email }}</p> 
       </div>
       <div class="d-grid gap-2">
-        <a class="btn btn-outline-danger" href="#">Cerrar sesión</a>
+        <a class="btn btn-outline-danger" (click)="logout()">Cerrar sesión</a>
         <!-- <a class="btn btn-outline-primary" routerLink="/app-user/mis-pedidos">Ver pedidos</a> -->
         <a class="btn btn-outline-secondary" href="#">Mis datos</a>
       </div>

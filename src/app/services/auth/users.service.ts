@@ -13,4 +13,7 @@ export class UsuarioService {
   obtenerTodosLosUsuarios(): Observable<any> {
     return this.http.get(this.apiUrl);
   }
+  obtenerUsuarioPorId(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/${id}`);
+  }
 }

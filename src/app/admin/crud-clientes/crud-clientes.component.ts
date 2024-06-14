@@ -6,6 +6,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatListModule } from '@angular/material/list';
 import { MatPaginator } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class CrudClientesComponent implements OnInit {
   constructor(
     private usuarioService: UsuarioService,
     private orderService: OrderService,
+    private router: Router,
   
   ) {}
 
@@ -40,14 +42,20 @@ export class CrudClientesComponent implements OnInit {
 
   // ... tus métodos existentes
 
-  verOrdenesDeUsuario(userId: number): void {
-    this.orderService.getAllOrdersByUser(userId).subscribe({
-      next: (ordenes) => {
-        this.ordenesSeleccionadas = ordenes;
-      },
-      error: (e) => console.error(e)
-    });
-  }
+
+verOrdenesDeUsuario(userId: number): void {
+  this.router.navigate(['admin/datos-cliente', userId]);
+}
+
+
+  // verOrdenesDeUsuario(userId: number): void {
+  //   this.orderService.getAllOrdersByUser(userId).subscribe({
+  //     next: (ordenes) => {
+  //       this.ordenesSeleccionadas = ordenes;
+  //     },
+  //     error: (e) => console.error(e)
+  //   });
+  // }
 
   selectedOrderDetails: any | undefined;
   showOrderDetails(orderId: number): void {

@@ -1,0 +1,18 @@
+.overflow-auto {
+    overflow-y: auto;
+    height: 500px;
+  }
+  
+  .flex-fill {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card-body {
+    flex-grow: 1;
+  }
+  
+  .card-footer {
+    margin-top: auto;
+  }
+  
