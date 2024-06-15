@@ -18,7 +18,7 @@ export class GestionarPedidosComponent {
   filteredOrders: any[] = [];
   // currentFilter: string = 'PENDIENTE'; 
   p:number = 1;
-  estadoActivo: string = 'Todos'; // Estado inicial que muestra todos los pedidos
+  estadoActivo: string = 'Todos'; // Estado inicial que muestra todos los pedidossss
   ordersFiltrados = [...this.orders];
 
   fechaInicio!: string;
@@ -61,14 +61,14 @@ export class GestionarPedidosComponent {
   changeOrderStatus(orderId: number, newStatus: string): void {
     this.orderService.updateOrderStatus(orderId, newStatus).subscribe({
       next: (response) => {
-            // Encuentra la orden en la lista y actualiza su estado
+          
       const order = this.orders.find(o => o.id === orderId);
       if (order) {
         order.estado = newStatus;
       }
-        // Actualiza la interfaz de usuario o la lista de órdenes si es necesario
+       
         console.log('Estado de la orden actualizado', response);
-        // Aquí podrías recargar los detalles de la orden o actualizar la vista
+       
       },
       error: (error) => {
         console.error('Error al actualizar el estado de la orden', error);
@@ -110,7 +110,7 @@ export class GestionarPedidosComponent {
 
   // cambiarEstadoActivo(estado: string) {
   //   this.estadoActivo = estado;
-  //   this.filtrarPorFecha(); // Vuelve a aplicar el filtro cuando cambia el estado
+  //   this.filtrarPorFecha(); 
   // }
 
 }

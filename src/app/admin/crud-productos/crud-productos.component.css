@@ -1,5 +1,4 @@
-/* Estilos CSS */
-/* Estilo general del contenedor */
+/* Estilos para el formulario de creación de productos */
 .container {
   background-color: #fff;
   border-radius: 8px;
@@ -91,35 +90,3 @@ h2 {
     padding: 10px;
   }
 }
-/* 
-.container {
-    background-color: #f8f9fa;
-    border-radius: 15px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  h2 {
-    color: #0056b3;
-    text-align: center;
-  }
-  
-  .form-label {
-    font-weight: bold;
-    color: #495057;
-  }
-  
-  .btn-primary {
-    background-color: #0056b3;
-    border: none;
-  }
-  
-  .btn-primary:hover {
-    background-color: #004494;
-  }
-  
-  .invalid-feedback {
-    display: none;
-  }
-  
-
-   */

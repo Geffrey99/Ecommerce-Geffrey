@@ -35,17 +35,23 @@ export class HeaderAdminComponent implements OnInit{
       next: (userData) => {
         if (userData) {
           this.userData = userData;
-          this.changeDetectorRef.detectChanges(); // Forzar la detección de cambios
+          this.changeDetectorRef.detectChanges(); // Me fuerza la detección de cambios
           console.log('UserComponent - User data:', userData);
         } else {
-          console.log('User data is null');
+          console.log('Los datos del usuario no están disponibles----Error entonces');
         }
       }
     });
   }
 
+  // Método para cerrar sesión
   logout(): void {
     this.loginService.logout();
-    this.router.navigate(['/iniciar-sesion']);
+    this.changeDetectorRef.detectChanges(); // Estoo me segura de que los cambios se detectan antes de navegar
+  this.router.navigate(['']).then(() => {
+    window.location.reload(); // 
+  });
+
   }
+
 }

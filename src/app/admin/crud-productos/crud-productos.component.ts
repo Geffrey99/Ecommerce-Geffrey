@@ -28,7 +28,7 @@ export class CrudProductosComponent {
       price: ['', Validators.required],
       description: ['', Validators.required],
       stock: ['', Validators.required],
-      category: [], // Agregar el campo de la categoría aquí
+      category: [], 
       photo: ['']
     });
   }
@@ -41,7 +41,7 @@ export class CrudProductosComponent {
       this.selectedFile = file;
       const reader = new FileReader();
       reader.onload = e => {
-        // Asegúrate de que el resultado no sea 'null' antes de asignarlo
+        // Asegúro de que el resultado no sea null
         if (reader.result) {
           this.imagenPrevisualizacion = reader.result;
         }
@@ -50,10 +50,6 @@ export class CrudProductosComponent {
     }
   }
   
-
-
-
-
   // onFileSelected(event: any) {
   //   const file = event.target.files[0];
   //   if (file) {
@@ -82,14 +78,15 @@ export class CrudProductosComponent {
         },
         error => {
           console.error('Error al crear el producto:', error);
-          // Aquí puedes manejar el error, por ejemplo, mostrar un mensaje de error al usuario
+          // mostrar un mensaje de error al usuario
         }
       );
     } else {
-      // Marcar los campos del formulario como inválidos o mostrar un mensaje al usuario
+      // Marcar los campos del formulario como inválidos posible opcion
     }
   }
 
+  //mostrar modal de confirmación
   openConfirmModal(title: string, message: string, buttonText: string): void {
     this.dialog.open(ModalConfirmacionComponent, {
       data: {

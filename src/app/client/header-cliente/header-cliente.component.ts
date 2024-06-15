@@ -59,11 +59,14 @@ export class HeaderClienteComponent  implements OnInit{
     this.categoryService.selectCategory(category);
   }
 
-logout(): void {
+  logout(): void {
     this.loginService.logout();
-    this.router.navigate(['/iniciar-sesion']);
-  }
+    this.changeDetectorRef.detectChanges(); // Asegúrate de que los cambios se detectan antes de navegar
+  this.router.navigate(['']).then(() => {
+    window.location.reload(); // 
+  });
 
+  }
 
 }
   

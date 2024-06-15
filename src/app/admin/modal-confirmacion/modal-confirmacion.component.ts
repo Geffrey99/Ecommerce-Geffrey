@@ -13,14 +13,18 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
      <!-- <button mat-button mat-dialog-close (click)="onClose">{{ data.buttonText }}</button> -->
     <!-- </mat-dialog-actions> -->
   `,
-  styleUrl: './modal-confirmacion.component.css'
+  styles: [`
+    h2 {
+      color: red;
+    }
+  `]
 })
 export class ModalConfirmacionComponent {
   constructor(
     public dialogRef: MatDialogRef<ModalConfirmacionComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    // Cierra el modal automáticamente después de 2 segundos
+    // Cierraaa el modal automáticamente después de 2 segundos okok Perfect
     setTimeout(() => {
       this.dialogRef.close();
     }, 2000);

@@ -7,9 +7,6 @@ import { Product } from '../../interface/Product';
   providedIn: 'root'
 })
 export class ProductService {
-  addProductImage(productId: number, selectedFile: any) {
-    throw new Error('Method not implemented.');
-  }
 
   private apiUrl = 'http://localhost:8081/api/products'; 
 
@@ -39,6 +36,14 @@ export class ProductService {
     return this.http.put(`${this.apiUrl}/editar/${id}`, formData);
   }
 
+  deleteProduct(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/eliminar/${id}`).pipe(
+      catchError(error => {
+        console.error('Error al eliminar el producto:', error);
+        return throwError('Error al eliminar el producto');
+      })
+    );
+  }
 }
- 
+
 

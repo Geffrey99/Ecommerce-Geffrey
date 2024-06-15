@@ -1,4 +1,4 @@
-// admin.routes.ts
+// admin.routes.ts rutas privadas del administrador
 import { Routes } from '@angular/router';
 import { CrudClientesComponent } from './crud-clientes/crud-clientes.component';
 import { CrudProductosComponent } from './crud-productos/crud-productos.component';
@@ -22,3 +22,5 @@ export const adminRoutes: Routes = [
   { path: 'admin', redirectTo: 'listaProductos', pathMatch: 'full' }
 
 ];
+
+

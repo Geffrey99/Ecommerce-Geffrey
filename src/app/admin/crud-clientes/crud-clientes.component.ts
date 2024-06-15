@@ -19,8 +19,10 @@ import { Router } from '@angular/router';
 export class CrudClientesComponent implements OnInit {
   usuarios: any[] = [];
   displayedColumns: string[] = ['foto', 'nombre', 'apellido', 'Informacion'];
-  dataSource = new MatTableDataSource<any>([]); // Utiliza MatTableDataSource para los usuarios
+  dataSource = new MatTableDataSource<any>([]); //  MatTableDataSource para los usuarios
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  ordenesSeleccionadas: any[] = [];
 
   constructor(
     private usuarioService: UsuarioService,
@@ -38,9 +40,7 @@ export class CrudClientesComponent implements OnInit {
     });
   }
 
-  ordenesSeleccionadas: any[] = [];
 
-  // ... tus métodos existentes
 
 
 verOrdenesDeUsuario(userId: number): void {
@@ -70,7 +70,7 @@ verOrdenesDeUsuario(userId: number): void {
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator; // Asigna el paginator al dataSource después de que se inicialice la vista
+    this.dataSource.paginator = this.paginator; // Asigno el paginator al dataSource después de que se inicialice la vistaaa
   }
 
 

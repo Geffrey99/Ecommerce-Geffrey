@@ -42,12 +42,36 @@ export class ListarProductosComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  editarProducto(productId: number): void {
-    this.router.navigate(['admin/editar-producto', productId]);
-  }
+
+
 
   eliminarProducto(productId: number): void {
-    // Lógica para eliminar el producto
+    if(confirm('¿Estás seguro de que quieres eliminar este producto?')) {
+      this.productService.deleteProduct(productId).subscribe({
+        next: (response) => {
+          console.log('Producto eliminado con éxito', response);
+          alert('Producto eliminado con éxito');   
+      },
+      error: (error) => {
+        console.error('Error al eliminar el producto', error);
+        // Verifica si la respuesta contiene un mensaje de error específico y lo muestra 
+        if (error.error instanceof ErrorEvent) {
+          // Error del lado del cliente o de la red
+          alert('Error al eliminar el producto: ' + error.error.message);
+        } else if (error.error && error.error.message) {
+          // En este caso el backend devolvió un código de respuesta de error
+          alert(error.error.message);
+        } else {
+          // Si no hay un mensaje de error específico, muestro un mensaje genérico
+          alert('Error al eliminar el producto, tiene stock o está en un pedido pendiente');
+        }
+      }
+    });
+  }
+}
+
+  editarProducto(productId: number): void {
+    this.router.navigate(['admin/editar-producto', productId]);
   }
 
   getFullImageUrl(photoUrl: string): string {

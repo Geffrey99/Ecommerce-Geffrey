@@ -14,16 +14,16 @@ import { Router } from '@angular/router';
   styleUrl: './admin.component.css'
 })
 export class AdminComponent {
-  // showProductComponent = true;
+  showProductComponent = true;
 
-  // constructor(private router: Router) {
-  //   // Escucha los eventos de cambio de ruta
-  //   this.router.events.pipe(
-  //     filter((event: any) => event instanceof NavigationEnd)
-  //   ).subscribe((event: NavigationEnd) => {
-  //     // Oculta el componente `app-product` si la ruta es diferente de la inicial
-  //     this.showProductComponent = event.urlAfterRedirects === '/admin';
-  //   });
-  // }
+  constructor(private router: Router) {
+    // Escucha los eventos de cambio de ruta....
+    this.router.events.pipe(
+      filter((event: any) => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      // Oculta lo que hay en app-root si la ruta es diferente de la inicial...........
+      this.showProductComponent = event.urlAfterRedirects === '/admin';
+    });
+  }
 }
   
