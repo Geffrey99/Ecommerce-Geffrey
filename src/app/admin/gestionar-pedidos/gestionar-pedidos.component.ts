@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
-
+import { FormsModule } from '@angular/forms';
 import { OrderService } from '../../services/features/order.service';
 
 @Component({
   selector: 'gestionar-pedidos',
   standalone: true,
-  imports: [CommonModule, NgxPaginationModule],
+  imports: [CommonModule, NgxPaginationModule, FormsModule],
   templateUrl: './gestionar-pedidos.component.html',
   styleUrl: './gestionar-pedidos.component.css'
 })
@@ -21,8 +21,7 @@ export class GestionarPedidosComponent {
   estadoActivo: string = 'Todos'; // Estado inicial que muestra todos los pedidos
   ordersFiltrados = [...this.orders];
 
-
-
+  fechaInicio!: string;
 
   constructor(private orderService: OrderService) { }
 
@@ -79,10 +78,39 @@ export class GestionarPedidosComponent {
 
   cambiarEstadoActivo(nuevoEstado: string): void {
     this.estadoActivo = nuevoEstado;
-    if (this.orders) {
-      this.ordersFiltrados = this.orders.filter(order => nuevoEstado === 'Todos' || order.estado === nuevoEstado);
-    }
-
+    this.aplicarFiltros();
   }
+
+  filtrarPorFecha(): void {
+    this.aplicarFiltros();
+  }
+
+  aplicarFiltros(): void {
+    // Primero filtra por estado
+    let pedidosFiltradosPorEstado = this.orders.filter(order => 
+      this.estadoActivo === 'Todos' || order.estado === this.estadoActivo
+    );
+
+    // Luego, si hay una fecha seleccionada, filtra esos resultados por fecha
+    if (this.fechaInicio) {
+      const fechaSeleccionada = new Date(this.fechaInicio);
+      fechaSeleccionada.setHours(0, 0, 0, 0);
+
+      this.ordersFiltrados = pedidosFiltradosPorEstado.filter(order => {
+        const fechaCompra = new Date(order.fechaCompra);
+        fechaCompra.setHours(0, 0, 0, 0);
+        return fechaCompra.getTime() === fechaSeleccionada.getTime();
+      });
+    } else {
+      // Si no hay fecha seleccionada, muestra todos los pedidos filtrados por estado
+      this.ordersFiltrados = pedidosFiltradosPorEstado;
+    }
+  }
+
+
+  // cambiarEstadoActivo(estado: string) {
+  //   this.estadoActivo = estado;
+  //   this.filtrarPorFecha(); // Vuelve a aplicar el filtro cuando cambia el estado
+  // }
 
 }

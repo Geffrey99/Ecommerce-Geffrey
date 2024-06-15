@@ -1,0 +1,71 @@
+/* Estilo general del formulario */
+form {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: #f7f7f7;
+  }
+  
+  /* Estilo de los grupos de formulario */
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  /* Estilo de las etiquetas */
+  label {
+    display: block;
+    margin-bottom: .5rem;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  /* Estilo de los campos de entrada y área de texto */
+  input[type="text"],
+  input[type="number"],
+  input[type="file"],
+  textarea,
+  select {
+    width: 100%;
+    padding: .5rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #495057;
+  }
+  
+  /* Estilo del campo de archivo para que coincida con otros campos */
+  input[type="file"] {
+    padding: .375rem .75rem;
+  }
+  
+  /* Estilo del área de texto para alinear la altura con otros campos */
+  textarea {
+    height: 100px;
+  }
+  
+  /* Estilo de los botones */
+  button {
+    padding: .5rem 1rem;
+    color: white;
+    background-color: #0056b3;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color .2s;
+  }
+  
+  /* Efecto al pasar el ratón por encima del botón */
+  button:hover {
+    background-color: #004494;
+  }
+  
+  /* Estilo de la imagen del producto */
+  img {
+    display: block;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.2);
+  }
+  

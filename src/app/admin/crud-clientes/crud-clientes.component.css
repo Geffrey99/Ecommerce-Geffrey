@@ -4,11 +4,11 @@
     border-radius: 50%;
     object-fit: cover;
   }
-  
+
   .mat-elevation-z8 {
     box-shadow: 0px 6px 10px -5px rgba(0,0,0,0.2);
   }
-  
+    /* 
   .ordenes-detalle, .orden-detalle {
     background-color: #f0f0f0;
     padding: 15px;
@@ -23,5 +23,48 @@
   h3 {
     color: #333;
     margin-bottom: 10px;
+  } */
+  mat-paginator {
+    background: transparent;
+    color: #333;
+  }
+
+  .mat-row {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  text-align: center;
+  font-size: 1.1em;
+  }
+
+  .mat-row:nth-child(odd) {
+    background: linear-gradient(to right, #f8f8f8, #4a394d2f);
+  }
+  
+  .mat-row:nth-child(even) {
+    background: linear-gradient(to right,  #f8f8f8, #688da47f);
+  }
+  
+ 
+  .header {
+    font-size: 1.1em; /* Letras más grandes */
+    background: -webkit-linear-gradient(#d8cece32, #a4a9dd42);
+  }
+
+
+  button.mat-button {
+    background: navajowhite; /* Degradado de dos colores */
+    color: #080808; /* Color del texto */
+    padding: 10px 20px; /* Aumento de altura y anchura */
+    border-radius: 20px; /* Sin borde */
+    cursor: pointer; /* Cambia el cursor a una mano */
+    transition: background-color 0.3s, transform 0.3s; /* Suaviza la transición del color y la transformación */
+  }
+  
+  button.mat-button:hover {
+    background-color: #d6e0ec; /* Color de fondo al pasar el ratón */
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño al pasar el ratón */
+  }
+  
+  button.mat-button:active {
+    transform: scale(0.95); /* Reduce ligeramente el tamaño al hacer clic */
   }
   

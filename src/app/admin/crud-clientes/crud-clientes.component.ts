@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
 })
 export class CrudClientesComponent implements OnInit {
   usuarios: any[] = [];
-  displayedColumns: string[] = ['foto', 'nombre', 'apellido', 'acciones'];
+  displayedColumns: string[] = ['foto', 'nombre', 'apellido', 'Informacion'];
   dataSource = new MatTableDataSource<any>([]); // Utiliza MatTableDataSource para los usuarios
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 

@@ -36,13 +36,13 @@
     <ng-container matColumnDef="acciones">
       <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
       <mat-cell *matCellDef="let product">
-        <button mat-button color="primary" (click)="editarProducto(product.id)">Editar</button>
-        <button mat-button color="warn" (click)="eliminarProducto(product.id)">Eliminar</button>
+        <button mat-button class="mat-button"  (click)="editarProducto(product.id)">Editar</button> &nbsp;
+        <button mat-button class="mat-button"  (click)="eliminarProducto(product.id)">Eliminar</button>
       </mat-cell>
     </ng-container>
   
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-header-row  class="header" *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row   class="mat-row" *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
   
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>

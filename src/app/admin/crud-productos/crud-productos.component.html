@@ -2,7 +2,7 @@
   <div class="container my-2">
     <div class="row justify-content-md-center">
       <div class="col-md-6">
-        <h2 class="mb-4">Registro de Producto</h2>
+        <h2 class="mb-4">Crear-Producto</h2>
         <div class="mb-3">
           <label for="name" class="form-label">Nombre:</label>
           <input type="text" class="form-control" id="name" formControlName="name" placeholder="Iphone 18 zz..." required>
@@ -19,7 +19,7 @@
         </div>
         <div class="mb-3">
           <label for="description" class="form-label">Descripción:</label>
-          <textarea class="form-control" id="description" formControlName="description" rows="3"  placeholder="El mejor movil del mercado y eso..." ></textarea>
+          <textarea class="form-control" id="description" formControlName="description" rows="3"  placeholder="El mejor movil del mercado y eso..." required></textarea>
           <div class="invalid-feedback">
             Por favor, introduce una descripción del producto.
           </div>
@@ -33,7 +33,7 @@
         </div>
         <div class="mb-3">
           <label for="category" class="form-label">Categoría:</label>
-          <select class="form-select" id="category" formControlName="category" required>
+          <select class="form-select" class="form-control" id="category" formControlName="category" required>
             <option value="1">Móviles</option>
             <option value="2">Portátiles</option>
             <option value="3">Accesorios</option>

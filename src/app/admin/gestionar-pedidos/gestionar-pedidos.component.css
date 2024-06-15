@@ -22,9 +22,7 @@ Estilos CSS
     /* border-color: #dee2e6 #dee2e6 #fff; */
   }
   
-  .table-hover tbody tr:hover {
-    background-color: #f5f5f5;
-  }
+
   
   .table thead {
     background-color: #343a40;
@@ -34,20 +32,61 @@ Estilos CSS
   .text-warning {
     color: #ffc107 !important;
   }
-  
-  .btn-outline-primary {
-    color: #007bff;
-    border-color: #007bff;
+
+
+  #tableG tbody tr:nth-of-type(odd) {
+    background: linear-gradient(to right, #f8f8f8, #4a394d2f) !important; /* Color para filas impares */
   }
   
-  .btn-outline-primary:hover {
-    color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
+  #tableG tbody tr:nth-of-type(even) {
+    background: linear-gradient(to right, #f8f8f8, #688da47f) !important; /* Color para filas pares */
   }
+  
+
+  .table-hover tbody tr:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .buttonD {
+    background: navajowhite; /* Degradado de dos colores */
+    color: #080808; /* Color del texto */
+    /* Aumento de altura y anchura */
+    border-radius: 20px; /* Sin borde */
+    cursor: pointer; /* Cambia el cursor a una mano */
+    transition: background-color 0.3s, transform 0.3s; /* Suaviza la transición del color y la transformación */
+  }
+  
+  .buttonD:hover {
+    background-color: #d6e0ec; /* Color de fondo al pasar el ratón */
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño al pasar el ratón */
+  }
+  
+  
 
   .nav-link.active {
     color: #fff;
     background-color: #007bff; /* Color azul predeterminado de Bootstrap */
   }
   /* cursor: no-drop; */
+  /* .filtro-fechas {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  } */
+  
+  .fecha-input {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    font-size: 16px;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  }
+  
+  .fecha-input:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+  }

@@ -1,4 +1,35 @@
+.mat-row {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+text-align: center;
+}
+
+.mat-row:nth-child(odd) {
+  background: linear-gradient(to right, #f8f8f8, #4a394d2f);
+}
+
+.mat-row:nth-child(even) {
+  background: linear-gradient(to right,  #f8f8f8, #688da47f);
+}
+
+
+.header {
+  font-size: 1.1em; /* Letras más grandes */
+  background: -webkit-linear-gradient(#d8cece32, #a4a9dd42);
+}
 button.mat-button {
-    margin: 0 5px; /* Espaciado entre botones */
-    background-color: aqua;
-  }
+  background: navajowhite;/* Degradado de dos colores */
+  color: #080808; /* Color del texto */
+ /* Aumento de altura y anchura */
+  border-radius: 10px; /* Sin borde */
+  cursor: pointer; /* Cambia el cursor a una mano */
+  transition: background-color 0.3s, transform 0.3s; /* Suaviza la transición del color y la transformación */
+}
+
+button.mat-button:hover {
+  background-color: #d6e0ec; /* Color de fondo al pasar el ratón */
+  transform: scale(1.05); /* Aumenta ligeramente el tamaño al pasar el ratón */
+}
+
+button.mat-button:active {
+  transform: scale(0.95); /* Reduce ligeramente el tamaño al hacer clic */
+}

@@ -4,6 +4,10 @@ import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angula
 import { ProductService } from '../../services/features/product.service';
 import { CommonModule } from '@angular/common';
 
+import { MatDialog } from '@angular/material/dialog';
+import { ModalConfirmacionComponent} from '../modal-confirmacion/modal-confirmacion.component';
+
+
 @Component({
   selector: 'app-editar-productos',
   standalone: true,
@@ -31,6 +35,7 @@ private productService: ProductService,
 private route: ActivatedRoute,
 private router: Router,
 private fb: FormBuilder,
+private dialog: MatDialog
 ) {} // Added closing parenthesis for the constructor
 
 ngOnInit(): void {
@@ -74,7 +79,8 @@ onSubmit(): void {
     }
 
     this.productService.updateProduct(this.productId, formData).subscribe(() => {
-      this.router.navigate(['/products']);
+      this.openConfirmModal('Confirmación de Actualización', 'El producto ha sido actualizado exitosamente ✔️ ', 'Aceptar');
+      this.router.navigate(['admin/listaProductos']);
     }, error => {
       console.error('Error al actualizar el producto:', error);
     });
@@ -95,5 +101,26 @@ onFileSelected(event: any) {
 getFullImageUrl(photoUrl: string): string {
   return photoUrl ? `${this.imageBaseUrl}${photoUrl}` : 'assets/okOk.svg';
 }
+
+
+openConfirmModal(title: string, message: string, buttonText: string): void {
+  this.dialog.open(ModalConfirmacionComponent, {
+    data: {
+      title: title,
+      message: message,
+      buttonText: buttonText
+    }
+  });
+}
+
+// onUpdateProduct(): void {
+//   // Lógica para actualizar el producto...
+//   this.openConfirmModal('Confirmación de Actualización', 'El producto ha sido actualizado exitosamente.', 'Aceptar');
+// }
+
+// onDeleteProduct(): void {
+//   // Lógica para eliminar el producto...
+//   this.openConfirmModal('Confirmación de Eliminación', 'El producto ha sido eliminado.', 'Entendido');
+// }
 
 }
