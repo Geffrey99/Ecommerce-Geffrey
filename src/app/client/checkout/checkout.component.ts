@@ -114,7 +114,7 @@ autorellenarFormulario(): void {
         next: (order) => {
           // Manejar la respuesta exitosa
           console.warn('Te llegará a tu correo el ticket: ', order);
-          this.showSuccesModal('Enviando...'); 
+          this.showSuccesModal('Procesando el pago...💱 Gracias!'); 
           // Redirigir al usuario o mostrar un mensaje de éxito
         },
         error: (error) => {

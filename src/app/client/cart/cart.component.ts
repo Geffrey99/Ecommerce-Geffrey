@@ -17,34 +17,34 @@ import { CartItem } from '../../interface/cart';
 export class CartComponent implements OnInit {
   cartItems: CartItem[] = [];
   mostrarCheckout: boolean = false;
-  
+
   constructor(private cartService: CartService,
-    private cd: ChangeDetectorRef) {}
+    private cd: ChangeDetectorRef) { }
 
-             ngOnInit(): void {
-              this.cartService.cart$.subscribe((items: any[]) => {
-                // Filtrar o transformar los elementos para asegurarse de que todos sean CartItem
-                this.cartItems = items.map(item => {
-                  // Asumiendo que todos los elementos deberían tener una propiedad 'product'
-                  return {
-                    product: item.product || item, // Si no hay 'product', asume que el item es el producto
-                    quantity: item.quantity || 1   // Si no hay 'quantity', asume que la cantidad es 1
-                  };
-                });
-                console.log(this.cartItems); // Esto te mostrará los datos en la consola
-              });
-            }
+  ngOnInit(): void {
+    this.cartService.cart$.subscribe((items: any[]) => {
+      // Filtrar o transformar los elementos para asegurarse de que todos sean CartItem
+      this.cartItems = items.map(item => {
+        // Asumiendo que todos los elementos deberían tener una propiedad 'product'
+        return {
+          product: item.product || item, // Si no hay 'product', asume que el item es el producto
+          quantity: item.quantity || 1   // Si no hay 'quantity', asume que la cantidad es 1
+        };
+      });
+      console.log(this.cartItems); // Esto te mostrará los datos en la consola
+    });
+  }
 
-            getTotal(): number {
-              return this.cartItems.reduce((acc, cartItem) => acc + (cartItem.product?.price * cartItem.quantity || 0), 0);
-            }
-            
-            removeProduct(productId: number): void {
-              this.cartService.removeFromCart(productId);
-              this.cartItems = this.cartItems.filter(item => item.product.id !== productId);
-              this.cd.detectChanges(); // Forzar la detección de cambios
-            }
-            
+  getTotal(): number {
+    return this.cartItems.reduce((acc, cartItem) => acc + (cartItem.product?.price * cartItem.quantity || 0), 0);
+  }
+
+  removeProduct(productId: number): void {
+    this.cartService.removeFromCart(productId);
+    this.cartItems = this.cartItems.filter(item => item.product.id !== productId);
+    this.cd.detectChanges(); // Forzar la detección de cambios
+  }
+
 
   updateQuantity(productId: number, quantity: number): void {
     this.cartService.updateCartItemQuantity(productId, quantity);
@@ -63,7 +63,7 @@ export class CartComponent implements OnInit {
   existenProductos(): boolean {
     return this.cartItems.length > 0;
   }
-  
+
   cancelarCompra(): void {
     this.mostrarCheckout = false;
     this.cartService.clearCart();
@@ -72,7 +72,7 @@ export class CartComponent implements OnInit {
   }
 
   manejarCancelarCompra(): void {
-    this.mostrarCheckout = false; 
+    this.mostrarCheckout = false;
   }
 
   trackByProduct(index: number, item: any): number {

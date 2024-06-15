@@ -30,7 +30,7 @@ userData?: usuario;
 
   loginForm=this.formBuilder.group({
     email: ['zambrano@gmail.com', [Validators.required, Validators.email]],
-    password: ['2070gz', Validators.required]
+    password: ['geffrey11', Validators.required]
   });
 
   registerForm=this.formBuilder.group({
@@ -54,10 +54,10 @@ login(): void {
     this.loginservice.login(this.loginForm.value as LoginRequest).subscribe({
       next: (response) => {
         const userData = response.usuario;
-        const userRole = userData.rol; // Asume que el rol viene dentro del objeto usuario
+        const userRole = userData.rol; //  el rol viene dentro del objeto usuario
         console.log('LoginComponent - Data received:', userData);
 
-        // Redirigir basado en el rol del usuario
+        // REDIRIGOOOO BASADOOO en el rol del usuario
         if (userRole === 'Admin') {
           this.router.navigate(['/admin']);
         } else {
@@ -81,45 +81,18 @@ login(): void {
 }
 
 
-// register(): void {
-//   if (this.registerForm.valid) {
-//     this.loginservice.registerContacto(this.registerForm.value as usuario).subscribe({
-
-//       next: (userData) => {
-//         console.log('3 componente ');
-//         console.log(userData); 
-       
-//       },
-//       error: (errorData)  => {
-//         console.error(errorData);
-//         this.loginError = errorData;
-//       },
-//       complete: ()  => {
-//         console.info('Registro completado con exito');
-//         this.router.navigateByUrl('app-user');
-//         this.registerForm.reset();
-//       }
-//     })
-//   } else {
-//     this.registerForm.markAllAsTouched();
-//     alert("Formulario inválido");
-//   }
-
-
-
-// }
 register(): void {
   if (this.registerForm.valid) {
       this.loginservice.registerContacto(this.registerForm.value as usuario).subscribe({
           next: (userData) => {
               console.log('Registro exitoso', userData);
-              this.router.navigateByUrl('app-user'); // Mover esta línea aquí
+              this.router.navigateByUrl('app-user'); 
               this.registerForm.reset();
           },
           error: (errorData) => {
               console.error('Error en el registro', errorData);
               this.loginError = errorData;
-              // Mostrar mensaje de error al usuario aquí
+            
           }
       });
   } else {

@@ -25,3 +25,15 @@
     }
 }
 
+.notificaciones {
+    padding: 20px 0; /* Añade un poco de espacio arriba y abajo */
+  }
+  
+  .notificaciones img {
+    margin-bottom: 15px; /* Espacio debajo de la imagen */
+  }
+  
+  .notificaciones p {
+    font-size: 1.2em; /* Tamaño del eslogan */
+    color: #555; /* Color del texto del eslogan */
+  }
