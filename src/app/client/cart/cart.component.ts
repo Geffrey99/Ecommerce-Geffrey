@@ -23,15 +23,15 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.cartService.cart$.subscribe((items: any[]) => {
-      // Filtrar o transformar los elementos para asegurarse de que todos sean CartItem
+
       this.cartItems = items.map(item => {
-        // Asumiendo que todos los elementos deberían tener una propiedad 'product'
+        
         return {
-          product: item.product || item, // Si no hay 'product', asume que el item es el producto
-          quantity: item.quantity || 1   // Si no hay 'quantity', asume que la cantidad es 1
+          product: item.product || item, 
+          quantity: item.quantity || 1   
         };
       });
-      console.log(this.cartItems); // Esto te mostrará los datos en la consola
+      console.log(this.cartItems);
     });
   }
 

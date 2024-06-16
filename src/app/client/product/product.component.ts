@@ -20,7 +20,7 @@ export class ProductComponent implements OnInit {
   currentSort: string = 'invalid'; // 'asc' para más barato a más caro, 'desc' para viceversa
 
   filterTerm: string = '';
-  filteredProducts: Product[] = []; // Añade esta línea para declarar la propiedad
+  filteredProducts: Product[] = []; 
   // currentSortO: string = 'invalid'; // Valor predeterminado que indica una opción no válida
   searchQuery: string = ''; // Propiedad para almacenar la consulta de búsqueda
   private imageBaseUrl = 'http://localhost:8081/api/product-images/';
@@ -55,20 +55,20 @@ export class ProductComponent implements OnInit {
       });
     }
 
-    // Actualiza los productos filtrados con el resultado
+
     this.filteredProducts = result;
   }
 
   onSearch(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     this.searchQuery = inputElement.value;
-    this.applyFilters(); // Aplica ambos filtros
+    this.applyFilters(); 
   }
 
   onSortChanged(event: Event) {
     const selectElement = event.target as HTMLSelectElement;
     this.currentSort = selectElement.value;
-    this.applyFilters(); // Aplica ambos filtros
+    this.applyFilters(); 
   }
   getFullImageUrl(photoUrl: string): string {
     return photoUrl ? `${this.imageBaseUrl}${photoUrl}` : 'assets/okOk.svg';

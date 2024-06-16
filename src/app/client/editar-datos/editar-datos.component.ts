@@ -42,7 +42,7 @@ export class EditarDatosComponent implements OnInit {
       const id = params['id'];
       if (id) {
         this.cargarDatosUsuario(id);
-        this.userId.next(id); // Actualiza el BehaviorSubject con el nuevo ID
+        this.userId.next(id); 
       }
     });
     this.crearFormulario();
@@ -78,7 +78,7 @@ export class EditarDatosComponent implements OnInit {
 }
 
   onProvinciaChange() {
-    if (this.usuarioForm) { // Asegúrate de que usuarioForm no es null
+    if (this.usuarioForm) { 
       const provinciaId = this.usuarioForm.get('provincia')?.value;
       if (provinciaId) {
       this.localizacionService.obtenerLocalidadesPorProvincia(provinciaId).subscribe(

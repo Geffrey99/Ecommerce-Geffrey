@@ -60,13 +60,13 @@ export class HeaderClienteComponent  implements OnInit{
   }
 
   onCategoryClick(category: Category): void {
-    // Aquí cambiamos el EventEmitter por el método selectCategory del servicio
+    
     this.categoryService.selectCategory(category);
   }
 
   logout(): void {
     this.loginService.logout();
-    this.changeDetectorRef.detectChanges(); // Asegúrate de que los cambios se detectan antes de navegar
+    this.changeDetectorRef.detectChanges(); 
   this.router.navigate(['']).then(() => {
     window.location.reload(); // 
   });
@@ -79,8 +79,6 @@ export class HeaderClienteComponent  implements OnInit{
       this.usuarioService.eliminarUsuario(id).subscribe({
         next: () => {
           console.log('Usuario eliminado con éxito');
-          // Aquí puedes añadir lógica adicional, como redirigir al usuario o actualizar la vista.
-          // Por ejemplo, si quieres redirigir al usuario a la página de inicio después de eliminar su cuenta:
           this.showSuccesModal('Hasta pronto! Nos volveremos a ver ...'); 
           // this.router.navigate(['/']).then(() => {
           //   window.location.reload();

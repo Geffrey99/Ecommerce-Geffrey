@@ -111,7 +111,6 @@ export class CartService {
 
   private loadCart(): CartItem[] {
     if (isPlatformBrowser(this.platformId)) {
-      // Aquí puedes acceder a localStorage porque estás en el navegador
       const savedUser = localStorage.getItem('user');
       if (savedUser) {
         const user: usuario = JSON.parse(savedUser);

@@ -71,14 +71,14 @@ export class DetallesComprasComponent {
   changeOrderStatus(orderId: number, newStatus: string): void {
     this.orderService.updateOrderStatus(orderId, newStatus).subscribe({
       next: (response) => {
-            // Encuentra la orden en la lista y actualiza su estado
+
       const order = this.orders.find(o => o.id === orderId);
       if (order) {
         order.estado = newStatus;
       }
-        // Actualiza la interfaz de usuario o la lista de órdenes si es necesario
+
         console.log('Estado de la orden actualizado', response);
-        // Aquí podrías recargar los detalles de la orden o actualizar la vista
+
       },
       error: (error) => {
         console.error('Error al actualizar el estado de la orden', error);
