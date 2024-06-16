@@ -60,7 +60,7 @@
       </div>
       <div class="d-grid gap-2">
         <a class="btn btn-outline-danger" (click)="logout()">Cerrar sesión</a>
-        <a class="btn btn-outline-primary" routerLink="/app-user/mis-pedidos">Ver pedidos</a>
+        <a class="btn btn-outline-primary" (click)="userData?.id ? editarMisDatos(userData?.id) : null">Mis Datos</a>
         <a class="btn btn-outline-secondary" (click)="userData?.id ? eliminar(userData?.id) : null">Eliminar cuenta</a>  <!--SOLO SI NO! TIENE PEDIDOS PENDIENTES O EN PROCESO DE ENVIO !  -->
       </div>
     </div>

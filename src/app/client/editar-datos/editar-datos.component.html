@@ -1,0 +1,48 @@
+<form [formGroup]="usuarioForm" (ngSubmit)="actualizarUsuario()" class="form-container">
+ <h1>Mis datos</h1>
+  <div class="form-group">
+    <div>
+      <label for="nombre">Nombre:</label>
+      <input id="nombre" type="text" formControlName="nombre">
+    </div>
+    <div>
+      <label for="apellido">Apellido:</label>
+      <input id="apellido" type="text" formControlName="apellido">
+    </div>
+  </div>
+  <div class="form-group">
+    <div>
+      <label for="email">Email:</label>
+      <input id="email" type="email" formControlName="email">
+    </div>
+    <div>
+      <label for="password">password:</label>
+      <input id="password" type="password" formControlName="password">
+    </div>
+  </div>
+  <div class="form-group">
+    <div>
+      <label for="direccionEnvio">Dirección de Envío:</label>
+      <input id="direccionEnvio" type="text" formControlName="direccionEnvio">
+    </div>
+    <div>
+      <label for="metodoPago">Método de Pago:</label>
+      <input id="metodoPago" type="text" formControlName="metodoPago">
+    </div>
+  </div>
+  <div class="form-group">
+    <div>
+      <label for="provincia">Provincia:</label>
+      <select id="provincia" formControlName="provincia" (change)="onProvinciaChange()">
+        <option *ngFor="let provincia of provincias" [ngValue]="provincia.id">{{ provincia.nombre }}</option>
+      </select>
+    </div>
+    <div>
+      <label for="localidad">Localidad:</label>
+      <select id="localidad" formControlName="localidad">
+        <option *ngFor="let localidad of localidades" [ngValue]="localidad.id">{{ localidad.nombre }}</option>
+      </select>
+    </div>
+  </div>
+  <button type="submit">Actualizar Datos</button>
+</form>

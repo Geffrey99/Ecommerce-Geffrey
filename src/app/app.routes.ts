@@ -16,6 +16,7 @@ export const routes: Routes = [
   { path: 'app-user', component: ClientComponent, canActivate: [AuthGuard], children: clientRoutes },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard], children: adminRoutes },
 
+  
 ];
      
 //El home component redirige a la vista de login ---> Y a su vez admin o client redirigen a sus respectivas vistas

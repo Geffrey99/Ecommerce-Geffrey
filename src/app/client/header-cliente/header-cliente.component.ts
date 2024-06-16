@@ -126,6 +126,10 @@ export class HeaderClienteComponent  implements OnInit{
     });
   }
 
+  editarMisDatos(id?: number): void {
+    this.router.navigate(['app-user/editar-datos', id]);
+  }
+
 
 }
 

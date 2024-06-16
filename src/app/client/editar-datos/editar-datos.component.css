@@ -1,0 +1,103 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  form {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  label {
+    display: block;
+    margin: 10px 0;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #5cb85c; /* Green color for financial sector */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  button:hover {
+    background-color: #4cae4c; /* Darker green on hover */
+  }
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  .form-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .form-group > div {
+    flex: 1; /* Cada div toma el mismo espacio */
+    margin-right: 10px; /* Espacio entre los inputs */
+  }
+  
+  .form-group > div:last-child {
+    margin-right: 0; /* No hay margen a la derecha del último input */
+  }
+  
+  button[type="submit"] {
+    width: 50%;
+    margin: 20px auto; /* Centra el botón */
+    padding: 10px;
+    background-color: #005eb8; /* Un color azul corporativo */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Ajustes para pantallas pequeñas */
+  @media (max-width: 768px) {
+    .form-group {
+      flex-direction: column;
+    }
+  
+    .form-group > div {
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+  
+    button[type="submit"] {
+      width: 100%;
+    }
+  }
+  
