@@ -22,6 +22,7 @@ loginError:string="";
 isRightPanelActive: boolean = false; 
 userLoginOn: boolean = false;
 userData?: usuario;
+  changeDetectorRef: any;
   constructor(private formBuilder: FormBuilder, private loginservice: LoginService, private router: Router ) {}
 
   ngOnInit(): void {
@@ -81,25 +82,65 @@ login(): void {
 }
 
 
+// register(): void {
+//   if (this.registerForm.valid) {
+//       this.loginservice.registerContacto(this.registerForm.value as usuario).subscribe({
+//           next: (userData) => {
+//               console.log('Registro exitoso', userData);
+//               this.registerForm.reset();
+//               this.changeDetectorRef.detectChanges(); // Asegúrate de que los cambios se detectan antes de navegar
+//              this.router.navigate(['']).then(() => {
+//                window.location.reload(); // 
+//                  });
+
+//           },
+//           error: (errorData) => {
+//               console.error('Error en el registro', errorData);
+//               this.loginError = errorData;
+            
+//           }
+//       });
+//   } else {
+//       this.registerForm.markAllAsTouched();
+//       alert("Formulario inválido");
+//   }
+// }
+
 register(): void {
   if (this.registerForm.valid) {
-      this.loginservice.registerContacto(this.registerForm.value as usuario).subscribe({
-          next: (userData) => {
-              console.log('Registro exitoso', userData);
-              this.router.navigateByUrl('app-user'); 
-              this.registerForm.reset();
-          },
-          error: (errorData) => {
-              console.error('Error en el registro', errorData);
-              this.loginError = errorData;
-            
-          }
-      });
+    this.loginservice.registerContacto(this.registerForm.value as usuario).subscribe({
+      next: (userData) => {
+        console.log('Registro exitoso', userData);
+        this.registerForm.reset();
+        // Navega al componente de inicio o dashboard después del registro
+        this.router.navigate(['']).then(() => {
+             window.location.reload(); // 
+                  });
+      },
+      error: (errorData) => {
+        console.error('Error en el registro', errorData);
+        // Muestra un mensaje de error adecuado aquí
+        this.showError(errorData);
+      }
+    });
   } else {
-      this.registerForm.markAllAsTouched();
-      alert("Formulario inválido");
+    this.registerForm.markAllAsTouched();
+    // Considera mostrar un mensaje de error más amigable aquí
+    this.showFormInvalidMessage();
   }
 }
+
+// Implementa estos métodos para manejar la visualización de errores y mensajes
+showError(errorData: any): void {
+  // Implementa la lógica para mostrar el error
+}
+
+showFormInvalidMessage(): void {
+  // Implementa la lógica para informar al usuario que el formulario es inválido
+}
+
+
+
 togglePanel(isSignUp: boolean): void {
   this.isRightPanelActive = isSignUp;
 }

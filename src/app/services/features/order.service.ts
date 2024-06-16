@@ -6,10 +6,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class OrderService {
-  private baseUrl = 'http://localhost:8081/api/orders';
+
 
   constructor(private http: HttpClient) { }
-
+  
+  private baseUrl = 'http://localhost:8081/api/orders';
   createOrder(userId: number, orderDetails: any[]): Observable<any> {
     const url = `${this.baseUrl}/create?userId=${userId}`;
     return this.http.post(url, orderDetails);
